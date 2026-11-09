@@ -105,36 +105,85 @@
             <span class="text-[11px] bg-indigo-950 text-indigo-400 px-2 py-0.5 rounded border border-indigo-800">총 22개 실전 악재 수록</span>
           </div>
           <p class="text-xs md:text-sm text-slate-400 mt-1">
-            소득 증빙 형태, 부모 지원 리스크, 맞벌이 DSR, 직주근접 노선망에 따라 터지는 악재의 강도가 결정됩니다.
+            직업, 소득구간(셀프 설정), 초기 종잣돈, 맞벌이 DSR, 직주근접 노선망에 따라 터지는 악재의 강도가 결정됩니다.
           </p>
         </div>
 
         <!-- 1. Job Selection -->
         <div class="mb-5">
           <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-            본인 직업군 & 대출 심사 스탯
+            1. 본인 직업군 선택
           </label>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
             <button type="button" onclick="setJob('public')" id="job-public" class="job-btn p-3 rounded-xl border border-indigo-600 bg-indigo-950/40 text-left transition">
               <div class="text-sm font-bold">🏛️ 공무원/교사</div>
-              <div class="text-[11px] text-indigo-300 font-medium mt-0.5">연 4,800만원 / 호봉제</div>
+              <div class="text-[11px] text-indigo-300 font-medium mt-0.5">기본 4,800만원 / 호봉제</div>
               <div class="text-[10px] text-slate-400">고용안정 / 기본급 DSR 벽</div>
             </button>
             <button type="button" onclick="setJob('corp')" id="job-corp" class="job-btn p-3 rounded-xl border border-slate-800 bg-slate-900/80 text-left transition">
               <div class="text-sm font-bold">🏢 대기업 정규직</div>
-              <div class="text-[11px] text-emerald-400 font-medium mt-0.5">연 8,500만원 / 성과급형</div>
+              <div class="text-[11px] text-emerald-400 font-medium mt-0.5">기본 8,500만원 / 성과급형</div>
               <div class="text-[10px] text-slate-400">대출한도 여유 / 성과급 쇼크</div>
             </button>
             <button type="button" onclick="setJob('sme')" id="job-sme" class="job-btn p-3 rounded-xl border border-slate-800 bg-slate-900/80 text-left transition">
               <div class="text-sm font-bold">🏭 중견·중소기업</div>
-              <div class="text-[11px] text-amber-400 font-medium mt-0.5">연 3,900만원 / 수당형</div>
+              <div class="text-[11px] text-amber-400 font-medium mt-0.5">기본 3,900만원 / 수당형</div>
               <div class="text-[10px] text-slate-400">정책대출 특례 / 비과세 제외</div>
             </button>
             <button type="button" onclick="setJob('freelancer')" id="job-freelancer" class="job-btn p-3 rounded-xl border border-slate-800 bg-slate-900/80 text-left transition">
               <div class="text-sm font-bold">💻 프리랜서/사업</div>
-              <div class="text-[11px] text-purple-400 font-medium mt-0.5">연 5,800만원 / 현금형</div>
+              <div class="text-[11px] text-purple-400 font-medium mt-0.5">기본 5,800만원 / 현금형</div>
               <div class="text-[10px] text-slate-400">소득증빙 지옥 / 종소세 경비</div>
             </button>
+          </div>
+        </div>
+
+        <!-- 1-2. Self Custom Income & Capital -->
+        <div class="bg-slate-950/60 p-4 md:p-5 rounded-xl border border-slate-800 mb-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+              2. 소득구간 & 초기 종잣돈 셀프 설정
+            </label>
+            <span class="text-[10px] text-indigo-400 bg-indigo-950/60 px-2 py-0.5 rounded border border-indigo-800/60">DSR 및 월 잉여현금 자동연동</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Income Input & Presets -->
+            <div class="bg-slate-900/40 p-3 rounded-lg border border-slate-800/80">
+              <div class="flex justify-between items-center mb-1.5">
+                <span class="text-xs text-slate-400 font-medium">본인 연소득 (세전)</span>
+                <span id="label-my-income-display" class="text-xs font-bold text-indigo-400 font-mono">4,800만 원</span>
+              </div>
+              <div class="relative mb-2">
+                <input type="number" id="input-my-income" value="4800" step="100" oninput="updateMyIncomeManual()" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white text-xs font-mono pr-12 focus:border-indigo-500 focus:outline-none" />
+                <span class="absolute right-3 top-2 text-[11px] text-slate-500">만원</span>
+              </div>
+              <div class="flex flex-wrap gap-1 text-[10px]">
+                <button type="button" onclick="setMyIncomePreset(3200)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">3,200만</button>
+                <button type="button" onclick="setMyIncomePreset(4800)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">4,800만</button>
+                <button type="button" onclick="setMyIncomePreset(6500)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">6,500만</button>
+                <button type="button" onclick="setMyIncomePreset(8500)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">8,500만</button>
+                <button type="button" onclick="setMyIncomePreset(12000)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">1.2억</button>
+              </div>
+            </div>
+
+            <!-- Capital Input & Presets -->
+            <div class="bg-slate-900/40 p-3 rounded-lg border border-slate-800/80">
+              <div class="flex justify-between items-center mb-1.5">
+                <span class="text-xs text-slate-400 font-medium">초기 보유 종잣돈 (자기자본)</span>
+                <span id="label-my-capital-display" class="text-xs font-bold text-emerald-400 font-mono">1.4억 원</span>
+              </div>
+              <div class="relative mb-2">
+                <input type="number" id="input-my-capital" value="14000" step="500" oninput="updateMyCapitalManual()" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white text-xs font-mono pr-12 focus:border-indigo-500 focus:outline-none" />
+                <span class="absolute right-3 top-2 text-[11px] text-slate-500">만원</span>
+              </div>
+              <div class="flex flex-wrap gap-1 text-[10px]">
+                <button type="button" onclick="setMyCapitalPreset(8000)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">8,000만</button>
+                <button type="button" onclick="setMyCapitalPreset(14000)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">1.4억</button>
+                <button type="button" onclick="setMyCapitalPreset(22000)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">2.2억</button>
+                <button type="button" onclick="setMyCapitalPreset(30000)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">3.0억</button>
+                <button type="button" onclick="setMyCapitalPreset(50000)" class="px-2 py-1 rounded bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300">5.0억</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -226,7 +275,7 @@
         <!-- 4. Expanded Transit & Workplace Hubs -->
         <div class="mb-5">
           <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-            직주근접 권역 & 통근 노선망 (매물 후보지 및 시세 결정)
+            3. 직주근접 권역 & 통근 노선망 (매물 후보지 및 시세 결정)
           </label>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
             <label class="flex items-start p-3 rounded-xl border border-indigo-600 bg-indigo-950/20 cursor-pointer hover:border-indigo-400">
@@ -681,6 +730,8 @@
 
     let gameState = {
       selectedJob: 'public',
+      myIncome: 4800,
+      myCapital: 14000,
       currentAge: 32,
       maritalStatus: 'married',
       incomeType: 'dual',
@@ -694,7 +745,7 @@
       netWorth: 0,
       houseValue: 82000,
       mortgageDebt: 40000,
-      liquidCash: 0,
+      liquidCash: 14000,
       mentalGauge: 100,
       defendedEvents: 0
     };
@@ -713,6 +764,29 @@
         activeBtn.classList.remove('border-slate-800', 'bg-slate-900/80');
         activeBtn.classList.add('border-indigo-600', 'bg-indigo-950/40');
       }
+
+      // Sync inputs with job defaults
+      const job = JOBS[jobKey];
+      document.getElementById('input-my-income').value = job.income;
+      document.getElementById('input-my-capital').value = job.capital;
+      updateIncomeCalc();
+    }
+
+    function setMyIncomePreset(amount) {
+      document.getElementById('input-my-income').value = amount;
+      updateIncomeCalc();
+    }
+
+    function updateMyIncomeManual() {
+      updateIncomeCalc();
+    }
+
+    function setMyCapitalPreset(amount) {
+      document.getElementById('input-my-capital').value = amount;
+      updateIncomeCalc();
+    }
+
+    function updateMyCapitalManual() {
       updateIncomeCalc();
     }
 
@@ -760,13 +834,24 @@
     }
 
     function updateIncomeCalc() {
-      const myIncome = JOBS[gameState.selectedJob].income;
+      const myIncomeVal = parseInt(document.getElementById('input-my-income')?.value, 10) || JOBS[gameState.selectedJob].income;
+      gameState.myIncome = myIncomeVal;
+      const myCapitalVal = parseInt(document.getElementById('input-my-capital')?.value, 10) || JOBS[gameState.selectedJob].capital;
+      gameState.myCapital = myCapitalVal;
+
+      if (document.getElementById('label-my-income-display')) {
+        document.getElementById('label-my-income-display').innerText = `${myIncomeVal.toLocaleString()}만 원`;
+      }
+      if (document.getElementById('label-my-capital-display')) {
+        document.getElementById('label-my-capital-display').innerText = `${(myCapitalVal / 10000).toFixed(1)}억 원 (${myCapitalVal.toLocaleString()}만)`;
+      }
+
       let spouseInc = 0;
       if (gameState.maritalStatus === 'married' && gameState.incomeType === 'dual') {
         spouseInc = parseInt(document.getElementById('input-spouse-income').value, 10) || 0;
       }
       gameState.spouseIncome = spouseInc;
-      const total = myIncome + spouseInc;
+      const total = myIncomeVal + spouseInc;
       const lbl = document.getElementById('label-total-income');
       if (lbl) lbl.innerText = `${total.toLocaleString()}만 원`;
     }
@@ -801,6 +886,600 @@
       });
     }
 
+    // =========================================================================
+    // 22 COMPREHENSIVE DISASTERS (EVERY REAL-WORLD PITFALL INVOLVED IN BUYING)
+    // =========================================================================
+    function buildDynamicEvents() {
+      const hasKids = gameState.childCount > 0;
+      const leave = gameState.leaveType;
+      const hubName = HUBS[gameState.workHub].name;
+
+      return [
+        // ---------------- STAGE 1: 매물 탐색 & 자금 조달 악재 ----------------
+        {
+          num: 1,
+          phase: "STAGE 1 : 매물 탐색",
+          title: "직주근접 단지 호가 급등 & 영끌 패닉바잉 유혹",
+          icon: "📈",
+          lawKey: "dsr",
+          desc: `${hubName} 권역 아파트 호가가 석 달 만에 8,000만원 뛰었습니다. 모아둔 종잣돈은 턱없이 부족한데 공인중개사는 '오늘 안 잡으면 내일은 3천 더 오른다'며 2금융권 신용대출까지 영끌하라고 부추깁니다.`,
+          choices: [
+            {
+              text: "원천징수 기반 DSR 40% 한도를 엄격히 지키고, 통근 노선 1~2정거장 외곽 가성비 단지로 눈높이를 재조정한다.",
+              mental: -5, cash: 0, debt: 0,
+              feedback: "무리한 2금융권 영끌을 차단하고 냉정하게 안전 예산선을 지켜냈습니다."
+            },
+            {
+              text: "조급한 마음에 카드론과 P2P 고금리(12%) 신용대출 5,000만원을 미리 끌어모아 호가에 맞춰 매수한다.",
+              mental: -30, cash: -1200, debt: +5000,
+              feedback: "고금리 대출로 인해 추후 본 주담대 DSR 한도가 깎이고 월 이자 부담이 폭증했습니다."
+            },
+            {
+              text: "매수를 포기하고 시드를 단기간에 2배 불리기 위해 전 재산을 코인/레버리지 주식에 올인한다.",
+              mental: -45, cash: -3500, debt: 0,
+              feedback: "원금 손실 쇼크로 내 집 마련 계획 자체가 2년 지연될 위기에 처합니다."
+            }
+          ]
+        },
+        {
+          num: 2,
+          phase: "STAGE 1 : 자금 조달",
+          title: "부모님의 자금 지원 전격 철회 & 차용증 증여세 리스크",
+          icon: "👴",
+          lawKey: "gift_tax",
+          desc: "매수를 결심하고 예산을 짰는데, 당초 1억원을 보태주기로 했던 부모님이 '시골 땅 문제와 형제들 반대'로 지원을 번복했습니다. 지원을 받더라도 국세청 자금조달계획서 세무조사가 두렵습니다.",
+          choices: [
+            {
+              text: "상증세법 제41조의4(무이자 한도 2.17억) 규정에 맞춰 정식 차용증을 쓰고 계좌이체 변제 계획을 세우거나 본인 예산으로 축소한다.",
+              mental: -10, cash: 0, debt: 0,
+              feedback: "세무조사 추징 리스크를 원천 차단하고 순수 본인 자본선으로 안전하게 재설계했습니다."
+            },
+            {
+              text: "부모님께 현금으로 1억원을 인출해 달라고 졸라 자금출처 없이 불법으로 투입한다.",
+              mental: -35, cash: -800, debt: 0,
+              feedback: "국세청 자금조달계획서 소명 통지서가 날아와 가산세 20% 폭탄을 맞았습니다."
+            },
+            {
+              text: "부모님과 대판 싸우고 연을 끊겠다며 모든 매수 계획을 스톱한다.",
+              mental: -40, cash: 0, debt: 0,
+              feedback: "가족 관계 파탄과 함께 매수 타이밍을 놓쳐 자괴감에 빠졌습니다."
+            }
+          ]
+        },
+        {
+          num: 3,
+          phase: "STAGE 1 : 임대차 충돌",
+          title: "현재 거주 중인 전세 집주인의 보증금 반환 거부",
+          icon: "🏠",
+          lawKey: "deposit_return",
+          desc: "새 집 잔금일에 맞춰 지금 살고 있는 전셋집을 빼야 하는데, 집주인이 '다음 세입자가 안 들어왔으니 보증금 2억 5천을 못 돌려준다'며 배 째라는 식으로 나옵니다.",
+          choices: [
+            {
+              text: "주택임대차보호법 제3조의3 임차권등기명령을 접수하고, 소송 촉진 특례법 연 12% 지연이자 내용증명을 발송해 압박한다.",
+              mental: +5, cash: 0, debt: 0,
+              feedback: "법적 조치 통보에 겁을 먹은 집주인이 다른 주담대를 받아 잔금일 전액 반환을 약속했습니다!"
+            },
+            {
+              text: "집주인 사정을 봐주겠다며 새 집 매도인에게 사정해서 잔금일을 무기한 연기하려 한다.",
+              mental: -35, cash: -1000, debt: 0,
+              feedback: "새 집 매도인이 계약 위반으로 계약금 몰수 통보를 해와 계약 파기 위기에 몰렸습니다."
+            },
+            {
+              text: "사설 심부름센터를 찾아가 집주인 집 앞에서 소란을 피운다.",
+              mental: -40, cash: -300, debt: 0,
+              feedback: "주거침입 및 협박 혐의로 입건되어 형사 합의금만 날렸습니다."
+            }
+          ]
+        },
+
+        // ---------------- STAGE 2: 계약서 작성 & 권리분석 악재 ----------------
+        {
+          num: 4,
+          phase: "STAGE 2 : 가계약 체결",
+          title: "가계약금 500만원 배액배상 거부 & 호가 인상 횡포",
+          icon: "⚖️",
+          lawKey: "precontract",
+          desc: "매물을 잡기 위해 가계약금 500만원을 입금했습니다. 그런데 다음 날 매도인이 '더 비싸게 사겠다는 사람이 나타났다'며 500만원 원금만 돌려주고 일방적으로 계약을 파기하려 합니다.",
+          choices: [
+            {
+              text: "대법원 2014다231378 판례를 근거로 약정 계약금 총액(매매가의 10%) 기준 위약금 내용증명을 즉각 송달한다.",
+              mental: +10, cash: +2000, debt: 0,
+              feedback: "대법원 판례의 위력을 확인한 매도인이 백기를 들고 원래 조건대로 계약을 이행하기로 했습니다!"
+            },
+            {
+              text: "법적 분쟁이 무서워서 매도인이 돌려준 500만원만 받고 순순히 포기한다.",
+              mental: -25, cash: 0, debt: 0,
+              feedback: "아쉬움 속에 좋은 집을 놓치고, 해당 매물은 1주일 뒤 다른 매수인에게 3천만원 더 비싸게 팔렸습니다."
+            },
+            {
+              text: "중개업소에 쳐들어가 책상을 엎고 난동을 부린다.",
+              mental: -35, cash: -200, debt: 0,
+              feedback: "업무방해 혐의로 지구대 조사를 받고 멘탈이 너덜너덜해졌습니다."
+            }
+          ]
+        },
+        {
+          num: 5,
+          phase: "STAGE 2 : 권리 분석",
+          title: "등기부 갑구 신탁등기 발견 & 무권대리 계약 사기",
+          icon: "📜",
+          lawKey: "trust_deed",
+          desc: "가계약 후 등기부를 자세히 떼어보니 소유자가 집주인이 아니라 'XX부동산신탁'으로 신탁등기가 되어 있습니다. 집주인은 '내 집 맞으니 신탁원부 볼 필요 없다'며 본계약을 서두릅니다.",
+          choices: [
+            {
+              text: "신탁원부를 발급받아 우선수익자 대출을 확인하고, 신탁회사의 정식 매매 동의 및 처분 권한 서류를 요구한다.",
+              mental: +10, cash: 0, debt: 0,
+              feedback: "신탁사 동의 없는 깡통 계약 사기를 완벽하게 회피하고 안전장치를 걸었습니다!"
+            },
+            {
+              text: "집주인과 공인중개사의 '아무 문제 없다'는 말만 믿고 계약금 8천만원을 그대로 집주인 개인 계좌로 쏜다.",
+              mental: -55, cash: -5000, debt: 0,
+              feedback: "신탁사의 무권대리 계약 무효 소송에 휘말려 계약금을 떼일 극단적 위기에 처했습니다."
+            },
+            {
+              text: "겁이 나서 계약금 입금 없이 잠수를 타고 모든 전화를 차단한다.",
+              mental: -20, cash: 0, debt: 0,
+              feedback: "가계약금 500만원을 고스란히 날리고 매수 기회를 날렸습니다."
+            }
+          ]
+        },
+        {
+          num: 6,
+          phase: "STAGE 2 : 계약서 작성",
+          title: "공인중개사의 대출 거절 면책 특약 삽입 거부",
+          icon: "✍️",
+          lawKey: "loan_special",
+          desc: "계약서 특약에 '은행 주담대 승인 불가 시 계약금 무조건 전액 반환' 특약을 넣으려 하자, 중개사와 매도인이 '그런 까다로운 특약 넣으면 계약 안 한다'고 으름장을 놓습니다.",
+          choices: [
+            {
+              text: "민법 제147조 해제조건 판례를 설명하며 특약을 관철시키거나, 관철 안 될 시 도장 찍기를 단호히 거부한다.",
+              mental: +5, cash: 0, debt: 0,
+              feedback: "단호한 태도에 매도인이 굴복하여 안전 특약 3종 세트를 모두 계약서에 넣었습니다!"
+            },
+            {
+              text: "대출이 당연히 나올 거라는 은행원의 구두 장담만 믿고 특약 없이 계약서에 도장을 찍는다.",
+              mental: -30, cash: 0, debt: 0,
+              feedback: "추후 대출 한도가 깎였을 때 계약금을 몰수당할 수 있는 치명적 시한폭탄을 안게 되었습니다."
+            },
+            {
+              text: "중개사에게 복비를 2배로 줄 테니 매도인 몰래 이면계약서를 써달라고 부탁한다.",
+              mental: -40, cash: -500, debt: 0,
+              feedback: "공인중개사법 위반 및 사문서위조 위험에 휘말려 곤욕을 치렀습니다."
+            }
+          ]
+        },
+        {
+          num: 7,
+          phase: "STAGE 2 : 불법 건축물",
+          title: "건축물대장 상 불법 섀시 베란다 확장 & 위반건축물 적발",
+          icon: "🔨",
+          lawKey: "illegal_building",
+          desc: "매수한 집을 구청에서 위반건축물로 현장 실사 통보했습니다. 알고 보니 전 주인이 베란다를 알루미늄 섀시로 불법 증축한 상태였고, 매년 이행강제금 300만원이 부과될 위기입니다.",
+          choices: [
+            {
+              text: "건축법 제79조 및 판례에 의거 잔금 전 매도인 비용으로 구청 양성화/원상복구를 완료하거나 철거비를 잔금에서 공제한다.",
+              mental: +5, cash: +300, debt: 0,
+              feedback: "매도인 귀책사유를 명확히 짚어 매매대금 800만원을 깎고 합법 복구했습니다."
+            },
+            {
+              text: "다들 이렇게 산다는 말에 속아 그냥 넘어가고 이행강제금을 내가 평생 떠안기로 한다.",
+              mental: -35, cash: -900, debt: 0,
+              feedback: "위반건축물 등재로 담보대출 승인이 거절되고 구청의 이행강제금 독촉에 시달립니다."
+            },
+            {
+              text: "구청 담당 공무원을 찾아가 뇌물을 건네며 적발 무마를 시도한다.",
+              mental: -60, cash: -500, debt: 0,
+              feedback: "뇌물공여 혐의로 형사 고발당해 인생 최대의 위기에 직면했습니다."
+            }
+          ]
+        },
+
+        // ---------------- STAGE 3: 대출 실행 & 잔금·등기 악재 ----------------
+        {
+          num: 8,
+          phase: "STAGE 3 : 대출 심사",
+          title: "소액임차인 방공제(4,800만) 쇼크 & 잔금 대출 부족",
+          icon: "📉",
+          lawKey: "room_deduction",
+          desc: "은행 대출 심사에서 방 3개 중 소액임차인 최우선변제금(방공제) 4,800만원이 대출 한도에서 뭉텅이로 깎여 나왔습니다. 잔금일 2주 전인데 4,800만원이 펑크 났습니다.",
+          choices: [
+            {
+              text: "한국주택금융공사(HF)의 모기지신용보증(MCG) 또는 서울보증보험 MCI 가입을 긴급 연계해 방공제 전액 면제를 승인받는다.",
+              mental: +10, cash: 0, debt: 0,
+              feedback: "MCG 보증 연계로 방공제 없이 희망 대출금 전액을 한 푼도 깎이지 않고 실행했습니다!"
+            },
+            {
+              text: "부족한 4,800만원을 메우기 위해 연 16% 대부업체 후순위 담보대출을 쓴다.",
+              mental: -40, cash: -1500, debt: +4800,
+              feedback: "살인적인 사채 이자로 인해 시작부터 하우스푸어의 나락으로 떨어집니다."
+            },
+            {
+              text: "잔금을 못 치른다고 매도인에게 전화해 나 몰라라 드러눕는다.",
+              mental: -50, cash: -4000, debt: 0,
+              feedback: "채무불이행(이행지체)으로 계약금 몰수 및 손해배상 청구 소송을 당했습니다."
+            }
+          ]
+        },
+        {
+          num: 9,
+          phase: "STAGE 3 : 권리 하자",
+          title: "잔금 3일 전 등기부 을구 사업 가압류 4,000만원 기습 등기",
+          icon: "⚠️",
+          lawKey: "provisional_seizure",
+          desc: "잔금을 치르기 사흘 전 등기부등본을 떼어보니, 매도인이 운영하던 하청업체 채권자가 4,000만원 가압류를 기습 등록했습니다. 매도인은 '잔금 받아서 갚을 테니 돈부터 달라'고 합니다.",
+          choices: [
+            {
+              text: "동시이행항변권(민법 제536조)을 발동하여 가압류 법원 말소 접수증 확인 전까지 잔금 4천 지급을 단호히 거절한다.",
+              mental: +10, cash: +400, debt: 0,
+              feedback: "은행 법무사가 가압류 해제 완제영수증을 직접 수령한 뒤 깨끗한 등기를 넘겨받았습니다!"
+            },
+            {
+              text: "매도인의 눈물 어린 호소에 넘어가 잔금을 개인 통장으로 전액 입금한다.",
+              mental: -45, cash: -4000, debt: 0,
+              feedback: "매도인이 돈을 들고 도주하여 가압류 채권자로부터 집을 강제경매당할 뻔했습니다."
+            },
+            {
+              text: "계약 파기를 선언하고 잔금일에 법원에 나타나지 않는다.",
+              mental: -35, cash: -1000, debt: 0,
+              feedback: "법적 절차를 무시한 일방적 불출석으로 이행지체 책임을 매수인이 덮어썼습니다."
+            }
+          ]
+        },
+        {
+          num: 10,
+          phase: "STAGE 3 : 부대비용",
+          title: "은행 지정 법무사의 취득세·채권할인료 300만원 바가지",
+          icon: "💸",
+          lawKey: "judicial_scam",
+          desc: "잔금 당일 은행 대출과 연계된 법무사가 견적서를 내밀었습니다. 법정 수수료 외에 '원인증서 작성료, 취득세 대행료, 채권할인료 덤터기'로 300만원이 과다 청구되었습니다.",
+          choices: [
+            {
+              text: "대한법무사회 공식 보수기준표를 들이밀며 부당 청구 항목을 삭감하고 채권할인 영수증 실비 정산을 요구한다.",
+              mental: +5, cash: +250, debt: 0,
+              feedback: "바가지 항목 250만원을 깎아내고 법정 실비만 결제하여 현금을 방어했습니다!"
+            },
+            {
+              text: "좋은 날에 얼굴 붉히기 싫다며 청구된 300만원 영수증에 군말 없이 서명하고 이체한다.",
+              mental: -20, cash: -300, debt: 0,
+              feedback: "아까운 쌈짓돈 300만원을 법무사의 눈먼 수수료로 날려버렸습니다."
+            },
+            {
+              text: "법무사 멱살을 잡고 은행 로비에서 고함을 지른다.",
+              mental: -30, cash: 0, debt: 0,
+              feedback: "경비원에게 제지당하며 잔금 이체 시간이 지나 지연배상금을 물 뻔했습니다."
+            }
+          ]
+        },
+        {
+          num: 11,
+          phase: "STAGE 3 : 이사 충돌",
+          title: "이사 당일 사다리차 배차 펑크 & 이삿짐센터의 추가금 갑질",
+          icon: "🚚",
+          lawKey: "deposit_return",
+          desc: "잔금일 아침, 예약했던 포장이사 업체가 '진입로가 좁아 작업이 어렵다'며 사다리차 추가금 80만원을 요구하고 현장에서 작업을 멈췄습니다. 아랫집과 새 집 잔금 시간이 1시간 앞으로 다가왔습니다.",
+          choices: [
+            {
+              text: "소비자분쟁해결기준을 고지하며 계약서 상 계약금의 2배 손해배상을 경고하고 엘리베이터 이사로 전환 조율한다.",
+              mental: -5, cash: -30, debt: 0,
+              feedback: "냉정한 대처로 무리한 바가지를 막고 관리사무소 승강기 사용료만 내고 이사를 마쳤습니다."
+            },
+            {
+              text: "시간에 쫓겨 이사업체가 달라는 대로 80만원 현금을 쥐어주고 굴복한다.",
+              mental: -25, cash: -80, debt: 0,
+              feedback: "이사 당일 극심한 스트레스와 함께 억울한 현금 손실을 입었습니다."
+            },
+            {
+              text: "이삿짐을 도로 차에 싣고 가라며 계약을 파기해 버린다.",
+              mental: -50, cash: -300, debt: 0,
+              feedback: "이삿짐 보관료와 호텔 숙박비, 새 집 잔금 지연 배상금까지 수백만원이 깨졌습니다."
+            }
+          ]
+        },
+
+        // ---------------- STAGE 4: 입주 초기 & 하자 분쟁 악재 ----------------
+        {
+          num: 12,
+          phase: "STAGE 4 : 인테리어",
+          title: "인테리어 턴키 업체의 공사 중단 & 1,500만원 추가금 요구",
+          icon: "🏚️",
+          lawKey: "interior_fraud",
+          desc: "입주 전 올수리를 맡겼는데 철거만 해두고 인테리어 업체가 잠적하더니 '자재비와 인건비가 폭등했으니 1,500만원을 더 입금 안 하면 공사를 안 한다'고 배짱을 부립니다.",
+          choices: [
+            {
+              text: "건설산업기본법 무면허 시공 형사고발을 통보하고 공정보증보험 청구 및 공사타절 계약을 집행한다.",
+              mental: -10, cash: -300, debt: 0,
+              feedback: "전문가의 법적 자문을 받아 사기 업체를 퇴출하고 잔금을 지켜 다른 직영업체로 마감했습니다."
+            },
+            {
+              text: "공사가 멈추면 입주를 못 하니 요구하는 1,500만원을 전액 추가 송금한다.",
+              mental: -45, cash: -1500, debt: 0,
+              feedback: "돈만 챙긴 인테리어 업자가 날림 공사 후 폐업해 버려 집안이 엉망진창이 되었습니다."
+            },
+            {
+              text: "공사 현장을 쇠사슬로 걸어 잠그고 1인 시위를 시작한다.",
+              mental: -40, cash: -200, debt: 0,
+              feedback: "공사 지연으로 월세 임시 거처를 전전하며 피폐한 나날을 보냈습니다."
+            }
+          ]
+        },
+        {
+          num: 13,
+          phase: "STAGE 4 : 누수 하자",
+          title: "입주 첫 달 장마철 안방 천장 누수 & 전 주인의 오리발",
+          icon: "💧",
+          lawKey: "latent_defect",
+          desc: "이사하고 첫 비가 쏟아지자 안방 천장에서 물이 폭포수처럼 쏟아집니다. 매도인에게 전화하자 '계약서에 현 상태대로 매매한다고 도장 찍지 않았냐'며 연락을 차단합니다.",
+          choices: [
+            {
+              text: "민법 제580조(하자담보책임 6개월) 근거 전문 누수진단서 첨부 내용증명 발송 및 법원 지급명령을 신청한다.",
+              mental: +5, cash: 0, debt: 0,
+              feedback: "대법원 판례에 따라 매도인이 수리비 450만원 전액을 배상하도록 법적으로 확정지었습니다!"
+            },
+            {
+              text: "싸우기 피곤해서 내 돈 450만원을 들여 사설 설비업자를 불러 고친다.",
+              mental: -25, cash: -450, debt: 0,
+              feedback: "매도인의 법적 책임을 고스란히 혼자 떠안아 비상장고가 털렸습니다."
+            },
+            {
+              text: "천장에 양동이를 받쳐두고 누수를 1년 넘게 방치한다.",
+              mental: -40, cash: 0, debt: 0,
+              feedback: "벽과 가구 전체에 곰팡이가 피어 호흡기 질환과 극심한 주거 스트레스가 발생했습니다."
+            }
+          ]
+        },
+        {
+          num: 14,
+          phase: "STAGE 4 : 보일러 동파",
+          title: "영하 18도 한파 온수배관 파열 & 아랫집 1,500만원 침수 피해",
+          icon: "❄️",
+          lawKey: "insurance_leak",
+          desc: "역대급 북극 한파에 베란다 온수배관이 동파되어 터졌습니다. 누수된 물이 아랫집 천장과 고가 음향가전을 덮쳐 아랫집에서 1,500만원 손해배상을 청구했습니다.",
+          choices: [
+            {
+              text: "사전 가입해둔 '일상생활배상책임특약(일배책)'과 손해방지비용 청구로 보험 접수한다.",
+              mental: +10, cash: -50, debt: 0,
+              insuranceCheck: true,
+              feedback: "일배책 방어막 가동! 자기부담금 50만원만으로 1,500만원 배상 책임 전액을 무력화했습니다."
+            },
+            {
+              text: "아랫집에 '자연재해이므로 법적 배상 책임이 없다'고 버틴다.",
+              mental: -45, cash: -1800, debt: 0,
+              feedback: "민사소송 패소로 배상금 1,500만원에 변호사 수임료와 연 12% 지연이자까지 물어주었습니다."
+            },
+            {
+              text: "카드론 고금리 대출을 받아 전액 사비로 합의한다.",
+              mental: -35, cash: -1500, debt: +500,
+              feedback: "막대한 생돈 지출로 비상금 통장이 완전히 바닥났습니다."
+            }
+          ]
+        },
+
+        // ---------------- STAGE 5: 10년 보유 & 거주 생활 위기 악재 ----------------
+        {
+          num: 15,
+          phase: "STAGE 5 : 금리 폭등",
+          title: "글로벌 인플레이션 충격 & 주담대 변동금리 6.5% 폭등",
+          icon: "📊",
+          lawKey: "dsr",
+          desc: "변동금리가 3.5%에서 6.5%로 수직 상승했습니다. 매달 내야 하는 주담대 원리금이 140만원에서 230만원으로 급등하며 숨통을 조여옵니다.",
+          choices: [
+            {
+              text: "은행에 금리인하요구권을 행사하고, 정부 고정금리 정책모기지(안심전환대출)로 긴급 대환한다.",
+              mental: +5, cash: 0, debt: 0,
+              feedback: "고정금리 4.0%로 대환 성공! 월 상환액을 다시 150만원 선으로 안정화했습니다."
+            },
+            {
+              text: "식비와 아이 학원비 등 모든 생활비를 극단적으로 끊고 버틴다.",
+              mental: -30, cash: -300, debt: 0,
+              feedback: "가족 간의 극심한 언쟁과 삶의 피로도로 일상이 피폐해졌습니다."
+            },
+            {
+              text: "이자 감당이 안 된다며 집을 헐값에 마이너스 프리미엄 급매물로 던진다.",
+              mental: -50, cash: -4000, debt: 0,
+              feedback: "공포에 굴복해 내 집을 헐값에 털고 나와 평생 후회하게 되었습니다."
+            }
+          ]
+        },
+        {
+          num: 16,
+          phase: "STAGE 5 : 소득 절벽",
+          title: hasKids
+            ? (leave === 'both' ? "부부 동시 육아휴직 돌입 & 원리금 상환 대위기!" : "육아휴직 급여 상한 & 주담대 원리금 절벽")
+            : "경기 침체에 따른 성과급 0원 & 월급 삭감 위기",
+          icon: hasKids ? "🍼" : "📉",
+          lawKey: "leave_crisis",
+          desc: hasKids
+            ? `아이 양육을 위해 ${leave === 'both' ? '부부가 순차/동시 육아휴직' : '육아휴직'}에 돌입했습니다. 휴직 급여 상한(월 160만원)으로 가계 소득이 반토막 났는데, 매달 주담대 220만원이 빠져나가며 비상금이 고갈됩니다.`
+            : `경기 불황으로 회사의 성과급이 0원으로 동결되고 수당이 대폭 삭감되어 월 원리금 지출 감당이 어려워졌습니다.`,
+          choices: hasKids ? [
+            {
+              text: "정부 지원 취약차주 주담대 원금상환유예(최대 1~3년 이자만 납부)를 은행에 정식 신청한다.",
+              mental: +10, cash: -150, debt: 0,
+              feedback: "원금 유예 승인을 받아 월 지출을 70만원 선으로 낮추고 고비를 무사히 넘겼습니다!"
+            },
+            {
+              text: "부족한 생활비를 메우기 위해 연 15% 리볼빙과 카드론을 돌려막는다.",
+              mental: -45, cash: -1200, debt: +2000,
+              feedback: "고금리 대출 이표가 눈덩이처럼 불어나 신용점수가 급락했습니다."
+            },
+            {
+              text: "원리금을 감당 못해 첫 집을 경매에 넘어가게 방치한다.",
+              mental: -60, cash: -5000, debt: 0,
+              feedback: "경매 처분으로 전 재산을 날리고 신용불량자로 전락할 뻔했습니다."
+            }
+          ] : [
+            {
+              text: "비상금 파킹통장을 풀고 고정비를 다이어트하여 금리 하강기까지 버텨낸다.",
+              mental: -5, cash: -200, debt: 0,
+              feedback: "안정적인 유동성 관리로 위기를 극복했습니다."
+            },
+            {
+              text: "생활고를 이유로 주담대 이자를 2회 연속 연체한다.",
+              mental: -35, cash: -500, debt: 0,
+              feedback: "기한이익상실(EOT) 경고장과 연체이자 가산 폭탄을 맞았습니다."
+            },
+            {
+              text: "야간 대리운전과 배달 등 무리한 쓰리잡으로 몸을 혹사한다.",
+              mental: -25, cash: +400, debt: 0,
+              feedback: "가계 경제는 지켰으나 건강 악화로 병원비 지출이 늘어났습니다."
+            }
+          ]
+        },
+        {
+          num: 17,
+          phase: "STAGE 5 : 이웃 분쟁",
+          title: "윗집의 심야 스크린골프 연습 & 발망치 층간소음 지옥",
+          icon: "🔊",
+          lawKey: "noise",
+          desc: "윗집에 새로 이사 온 입주민이 거실에 골프 연습망을 치고 밤 11시마다 골프를 칩니다. 쿵쿵거리는 충격음과 진동에 온 가족이 수면장애와 신경쇠약에 걸렸습니다.",
+          choices: [
+            {
+              text: "환경부 층간소음 이웃사이센터에 소음측정 중재를 정식 접수하고 관리사무소 경고를 병행한다.",
+              mental: +5, cash: 0, debt: 0,
+              feedback: "공식 데시벨 측정 결과 규제치 초과가 증명되어 윗집이 골프망을 철거하고 방음 매트를 시공했습니다."
+            },
+            {
+              text: "천장에 우퍼 스피커를 달고 헤비메탈 음악을 틀어 보복 소음을 낸다.",
+              mental: -30, cash: -100, debt: 0,
+              feedback: "경범죄처벌법 및 민사 인격권 침해 역고소를 당해 법원에 출석하게 되었습니다."
+            },
+            {
+              text: "야구방망이를 들고 윗집 현관문을 쾅쾅 부술 듯 두드리며 위협한다.",
+              mental: -45, cash: -300, debt: 0,
+              feedback: "특수협박 및 주거침입 혐의로 형사 입건되어 합의금을 물어주었습니다."
+            }
+          ]
+        },
+        {
+          num: 18,
+          phase: "STAGE 5 : 단지 노후화",
+          title: "승강기 교체 특별장기수선충당금 세대당 800만원 기습 부과",
+          icon: "🛗",
+          lawKey: "special_reserve",
+          desc: "아파트 25년 차 엘리베이터 정밀안전진단 불합격으로 입주자대표회의에서 세대당 800만원을 일시불로 걷겠다고 관리비 고지서에 청구했습니다.",
+          choices: [
+            {
+              text: "공동주택관리법 제30조 및 지자체 '노후 승강기 교체 보조금(40%) 조례' 신청을 입대의에 공식 상정한다.",
+              mental: +10, cash: -250, debt: 0,
+              feedback: "시청 보조금 지원사업 대상에 선정되어 세대 분담금을 800만원에서 250만원으로 낮췄습니다!"
+            },
+            {
+              text: "따지기 귀찮아서 청구된 800만원을 고스란히 이체한다.",
+              mental: -20, cash: -800, debt: 0,
+              feedback: "합리적 제도 활용 없이 소중한 목돈 800만원이 통장에서 빠져나갔습니다."
+            },
+            {
+              text: "엘리베이터 없이 계단으로 다니면 된다며 공사 자체를 무조건 반대한다.",
+              mental: -35, cash: 0, debt: 0,
+              feedback: "엘리베이터 운행 중단으로 매일 계단을 오르내리는 고역을 치렀습니다."
+            }
+          ]
+        },
+        {
+          num: 19,
+          phase: "STAGE 5 : 시장 쇼크",
+          title: "인근 신도시 1.5만 가구 입주 폭탄 & 역전세 공포",
+          icon: "🏗️",
+          lawKey: "tax_exemption",
+          desc: "인접 택지지구에 15,000세대 매머드급 신축 아파트가 동시 쏟아지며 전세가와 매매가가 일시적으로 18% 폭락하고 언론에서는 '부동산 대폭락' 뉴스를 연일 쏟아냅니다.",
+          choices: [
+            {
+              text: "입주장 과잉 공급은 1~2년 내 해소된다는 점을 직시하고 직주근접 실거주로 10년 비과세를 채우며 버틴다.",
+              mental: +10, cash: 0, debt: -2000,
+              feedback: "공포에 흔들리지 않고 버텨내자, 2년 뒤 신축 인프라와 함께 집값이 전고점을 뚫고 상승했습니다!"
+            },
+            {
+              text: "공포를 이기지 못하고 가장 바닥 시세에 마이너스 프리미엄 급매물로 집을 던진다.",
+              mental: -50, cash: -6000, debt: 0,
+              feedback: "바닥에서 손절한 뒤 불과 반년 만에 집값이 반등해 억울함으로 화병을 얻었습니다."
+            },
+            {
+              text: "단지 부녀회와 함께 인터넷 카페에서 호가 담합 및 허위 매물 신고 시위를 벌인다.",
+              mental: -25, cash: 0, debt: 0,
+              feedback: "공인중개사법상 시세교란행위 위반으로 관할 지자체 과태료 처분을 받았습니다."
+            }
+          ]
+        },
+
+        // ---------------- STAGE 6: 10년 완주 & 비과세 매도 악재 ----------------
+        {
+          num: 20,
+          phase: "STAGE 6 : 정비사업",
+          title: "재건축 기대감 무산 & 추가분담금 5억원 쇼크",
+          icon: "🏢",
+          lawKey: "special_reserve",
+          desc: "단지 내에 재건축 추진 바람이 불어 기대감이 치솟았으나, 공사비 폭등으로 비례율이 70%로 곤두박질치고 세대당 5억원의 추가분담금 통보가 날아왔습니다.",
+          choices: [
+            {
+              text: "뜬구름 잡는 재건축 환상을 접고, 실거주 내구연한 수선(샤시/배관) 중심으로 유지하며 정상 가치로 매도를 준비한다.",
+              mental: +5, cash: -200, debt: 0,
+              feedback: "분담금 지옥에 빠지지 않고 냉정하게 실거주 자산 가치를 보존했습니다."
+            },
+            {
+              text: "분담금 5억원을 내겠다며 제2금융권 대출을 받아 무리하게 조합 사업을 밀어붙인다.",
+              mental: -45, cash: -2500, debt: +5000,
+              feedback: "공사비 증액 소송전으로 시공사가 유치권을 행사하며 공사가 무기한 중단되었습니다."
+            },
+            {
+              text: "지주택(지역주택조합)으로 갈아타면 새 아파트를 반값에 준다는 말에 현혹된다.",
+              mental: -60, cash: -8000, debt: 0,
+              feedback: "원수에게 권한다는 지주택 함정에 빠져 전 재산을 날릴 뻔했습니다."
+            }
+          ]
+        },
+        {
+          num: 21,
+          phase: "STAGE 6 : 출구 빙하기",
+          title: "10년 보유 완주 & 극심한 거래 절벽 속 다운계약서 유혹",
+          icon: "📉",
+          lawKey: "tax_exemption",
+          desc: "아이도 자라 상급지로 갈아타기 위해 집을 내놓았으나 거래 빙하기라 매수자가 없습니다. 한 매수자가 나타나 '매매가를 5천만원 낮추는 다운계약서를 써주면 당장 계약하겠다'고 제안합니다.",
+          choices: [
+            {
+              text: "다운계약서는 비과세 박탈 및 과태료 대상임을 주지시키고, 정상 실거래가 신고와 넉넉한 잔금일(4개월)로 협상한다.",
+              mental: +10, cash: +85000, debt: 0,
+              feedback: "국세청 자금조달계획서 검증을 무결점으로 통과하고 1세대 1주택 12억 전액 비과세를 확정했습니다!"
+            },
+            {
+              text: "세금 아끼고 빨리 팔겠다는 생각에 매수인의 요구대로 다운계약서를 작성한다.",
+              mental: -50, cash: -3000, debt: 0,
+              feedback: "국세청 실거래가 정밀 조사에 적발되어 1주택 비과세가 전면 박탈되고 양도세+과태료 폭탄을 맞았습니다."
+            },
+            {
+              text: "중개사 한 곳에만 독점 매물로 맡겨두고 기약 없이 손님이 오기만을 기도한다.",
+              mental: -15, cash: +65000, debt: 0,
+              feedback: "매도가 1년 넘게 지연되어 시세보다 5,000만원 깎인 가격에 눈물의 처분을 했습니다."
+            }
+          ]
+        },
+        {
+          num: 22,
+          phase: "STAGE 6 : 최종 결산",
+          title: "1세대 1주택 장기보유특별공제 80% 비과세 완성!",
+          icon: "🏆",
+          lawKey: "tax_exemption",
+          desc: "10년의 험난한 부동산 악재 대장정이 끝났습니다. 누수, 금리 폭등, 가압류, 육아휴직 소득 절벽을 이겨내고 마침내 순자산을 온전히 손에 쥐었습니다.",
+          choices: [
+            {
+              text: "국세청 홈택스에 실거주 10년 입증 서류를 완벽 첨부하여 양도소득세 0원 비과세 신고를 완료한다.",
+              mental: +20, cash: +10000, debt: 0,
+              feedback: "축하합니다! 양도세 0원의 합법적 비과세 혜택과 함께 제2편 [상급지 갈아타기] 종잣돈을 거머쥐었습니다!"
+            },
+            {
+              text: "세무 신고를 누락하고 세무서에서 연락이 올 때까지 그냥 방치한다.",
+              mental: -20, cash: -300, debt: 0,
+              feedback: "무신고 가산세 20%가 부과되어 뒤늦게 세무사를 찾아가 비용을 지불했습니다."
+            },
+            {
+              text: "첫 집 매도 대금을 들고 지인의 고수익 사설 펀드에 투자한다.",
+              mental: -55, cash: -6000, debt: 0,
+              feedback: "10년간 피땀 흘려 모은 내 집 마련 종잣돈을 기획부동산에 사기당할 뻔했습니다."
+            }
+          ]
+        }
+      ];
+    }
+
     let dynamicEvents = [];
 
     function startGame() {
@@ -811,7 +1490,7 @@
       const hub = HUBS[gameState.workHub];
       gameState.houseValue = hub.price;
       gameState.mortgageDebt = hub.debt;
-      gameState.liquidCash = job.capital;
+      gameState.liquidCash = gameState.myCapital;
       gameState.hasInsurance = document.getElementById('toggle-insurance').checked;
 
       dynamicEvents = buildDynamicEvents();
@@ -824,7 +1503,7 @@
       document.getElementById('status-badges').classList.remove('hidden');
 
       const familyText = gameState.maritalStatus === 'single' ? '미혼 1인 가구' : `기혼 (${gameState.incomeType === 'dual' ? '맞벌이' : '외벌이'}, 자녀 ${gameState.childCount}명)`;
-      document.getElementById('top-char-summary').innerText = `${job.name} · ${familyText} · ${gameState.currentAge}세`;
+      document.getElementById('top-char-summary').innerText = `${job.name} (연 ${(gameState.myIncome/10000).toFixed(1)}억) · ${familyText} · ${gameState.currentAge}세`;
 
       gameState.currentStep = 0;
       renderEventStep(0);
@@ -855,7 +1534,7 @@
       document.getElementById('stat-debt-val').innerText = `${(gameState.mortgageDebt / 10000).toFixed(1)}억`;
       document.getElementById('stat-cash-val').innerText = `${Math.round(gameState.liquidCash).toLocaleString()}만`;
 
-      const totalIncome = JOBS[gameState.selectedJob].income + (gameState.incomeType === 'dual' ? gameState.spouseIncome : 0);
+      const totalIncome = gameState.myIncome + (gameState.incomeType === 'dual' ? gameState.spouseIncome : 0);
       const monthlyIncome = Math.round(totalIncome / 12);
       const monthlyMortgage = Math.round((gameState.mortgageDebt * 0.055) / 12);
       const monthlyLiving = gameState.maritalStatus === 'single' ? 180 : (250 + gameState.childCount * 50);
@@ -1063,6 +1742,8 @@
       const savePayload = {
         v: 3,
         job: gameState.selectedJob,
+        income: gameState.myIncome,
+        capital: gameState.myCapital,
         marital: gameState.maritalStatus,
         children: gameState.childCount,
         hub: gameState.workHub,
