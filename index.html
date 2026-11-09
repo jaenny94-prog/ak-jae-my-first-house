@@ -4,43 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>부동산 악재 생존기: 제1편 첫 집 마련 10년의 여정</title>
-  <meta name="description" content="첫 집 마련 과정에서 겪는 실전 부동산 법률 및 금융 악재 시뮬레이션 게임" />
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              50: '#eef2ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-            }
-          }
-        }
-      }
-    };
-  </script>
-
   <style>
     body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
       padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);
       -webkit-tap-highlight-color: transparent;
-      user-select: none;
     }
     .custom-scroll::-webkit-scrollbar {
       width: 4px;
@@ -55,7 +32,7 @@
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-[100dvh] flex flex-col font-sans antialiased overflow-x-hidden">
+<body class="bg-slate-950 text-slate-100 min-h-[100dvh] flex flex-col antialiased overflow-x-hidden">
 
   <!-- ================= HEADER ================= -->
   <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-2.5">
@@ -142,14 +119,14 @@
           <input type="range" id="input-age" min="26" max="48" value="32" oninput="updateAge()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer" />
         </div>
 
-        <!-- 3. Marital Status & Dual Income & Children Section -->
+        <!-- 3. Marital Status & Children Section -->
         <div class="bg-slate-950/60 p-4 md:p-5 rounded-xl border border-slate-800 mb-5 space-y-4">
           <div>
             <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
               혼인 상태
             </label>
             <div class="grid grid-cols-2 gap-2.5">
-              <button type="button" onclick="setMarital('single')" id="marital-single" class="marital-btn py-2.5 px-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-bold text-slate-300 transition">
+              <button type="button" onclick="setMarital('single')" id="marital-single" class="marital-btn py-2.5 px-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-bold text-slate-400 transition">
                 💍 미혼 (1인 가구)
               </button>
               <button type="button" onclick="setMarital('married')" id="marital-married" class="marital-btn py-2.5 px-3 rounded-xl border border-indigo-600 bg-indigo-950/50 text-xs font-bold text-white transition">
@@ -158,13 +135,12 @@
             </div>
           </div>
 
-          <!-- Married Details (Dynamic) -->
+          <!-- Married Options Box -->
           <div id="married-options" class="space-y-4 pt-2 border-t border-slate-800/80">
-            <!-- Dual Income vs Single Income -->
             <div>
               <label class="block text-xs text-slate-400 mb-1.5">가구 소득 형태</label>
               <div class="grid grid-cols-2 gap-2.5">
-                <button type="button" onclick="setIncomeType('single')" id="income-single" class="income-btn py-2 px-3 rounded-lg border border-slate-800 bg-slate-900 text-xs text-slate-300">
+                <button type="button" onclick="setIncomeType('single')" id="income-single" class="income-btn py-2 px-3 rounded-lg border border-slate-800 bg-slate-900 text-xs text-slate-400">
                   외벌이 (배우자 전업)
                 </button>
                 <button type="button" onclick="setIncomeType('dual')" id="income-dual" class="income-btn py-2 px-3 rounded-lg border border-emerald-500 bg-emerald-950/40 text-xs font-bold text-emerald-300">
@@ -173,7 +149,7 @@
               </div>
             </div>
 
-            <!-- Spouse Income Input -->
+            <!-- Spouse Income -->
             <div id="spouse-income-box" class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/60 p-3 rounded-lg border border-slate-800">
               <div>
                 <label class="block text-[11px] text-slate-400 mb-1">배우자 연소득 (만원)</label>
@@ -196,7 +172,7 @@
               </div>
             </div>
 
-            <!-- Parental Leave Selection -->
+            <!-- Parental Leave -->
             <div id="leave-option-box">
               <label class="block text-xs text-slate-400 mb-1.5">
                 출산 시 육아휴직 계획 <span class="text-rose-400 font-semibold">(소득 급감 & 주담대 원리금 위험)</span>
@@ -204,7 +180,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button type="button" onclick="setLeaveType('none')" id="leave-btn-none" class="leave-btn p-2 rounded-lg border border-slate-800 bg-slate-900 text-left">
                   <div class="text-xs font-bold text-slate-300">휴직 미사용</div>
-                  <div class="text-[10px] text-slate-400 mt-0.5">양가 조모 양육/입주 베이비시터</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">양가 조모 양육/입주 시터</div>
                 </button>
                 <button type="button" onclick="setLeaveType('one')" id="leave-btn-one" class="leave-btn p-2 rounded-lg border border-indigo-600 bg-indigo-950/50 text-left">
                   <div class="text-xs font-bold text-indigo-300">한 명만 1년 사용</div>
@@ -219,14 +195,13 @@
           </div>
         </div>
 
-        <!-- 4. Expanded Transit & Workplace Hubs (8 Options) -->
+        <!-- 4. Expanded Transit & Workplace Hubs -->
         <div class="mb-5">
           <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
             직주근접 권역 & 통근 노선망 (매물 후보지 및 시세 결정)
           </label>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            
-            <label class="flex items-start p-3 rounded-xl border border-indigo-600 bg-indigo-950/20 cursor-pointer hover:border-indigo-400 transit-label">
+            <label class="flex items-start p-3 rounded-xl border border-indigo-600 bg-indigo-950/20 cursor-pointer hover:border-indigo-400">
               <input type="radio" name="work_hub" value="pangyo" checked class="mt-1 mr-2.5 text-indigo-600 focus:ring-0" />
               <div>
                 <div class="font-bold text-white">판교·분당 테크노밸리</div>
@@ -234,8 +209,7 @@
                 <div class="text-[10px] text-slate-400">8.2억 준신축 (평균 대출 4억)</div>
               </div>
             </label>
-
-            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400 transit-label">
+            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400">
               <input type="radio" name="work_hub" value="samsung" class="mt-1 mr-2.5 text-indigo-600 focus:ring-0" />
               <div>
                 <div class="font-bold text-white">삼성전자 (기흥·화성·평택)</div>
@@ -243,8 +217,7 @@
                 <div class="text-[10px] text-slate-400">7.4억 신축 (평균 대출 3.5억)</div>
               </div>
             </label>
-
-            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400 transit-label">
+            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400">
               <input type="radio" name="work_hub" value="hynix" class="mt-1 mr-2.5 text-indigo-600 focus:ring-0" />
               <div>
                 <div class="font-bold text-white">SK하이닉스 (이천 부발·용인 원삼)</div>
@@ -252,8 +225,7 @@
                 <div class="text-[10px] text-slate-400">5.8억 신축 (평균 대출 2.6억)</div>
               </div>
             </label>
-
-            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400 transit-label">
+            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400">
               <input type="radio" name="work_hub" value="gbd" class="mt-1 mr-2.5 text-indigo-600 focus:ring-0" />
               <div>
                 <div class="font-bold text-white">서울 강남 업무지구 (GBD)</div>
@@ -261,8 +233,7 @@
                 <div class="text-[10px] text-slate-400">11.5억 구축 (평균 대출 5.2억)</div>
               </div>
             </label>
-
-            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400 transit-label">
+            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400">
               <input type="radio" name="work_hub" value="ybd" class="mt-1 mr-2.5 text-indigo-600 focus:ring-0" />
               <div>
                 <div class="font-bold text-white">서울 여의도·마곡 (YBD/MBD)</div>
@@ -270,8 +241,7 @@
                 <div class="text-[10px] text-slate-400">9.5억 준신축 (평균 대출 4.5억)</div>
               </div>
             </label>
-
-            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400 transit-label">
+            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400">
               <input type="radio" name="work_hub" value="cbd" class="mt-1 mr-2.5 text-indigo-600 focus:ring-0" />
               <div>
                 <div class="font-bold text-white">서울 도심권 광화문·종로 (CBD)</div>
@@ -279,8 +249,7 @@
                 <div class="text-[10px] text-slate-400">9.2억 역세권 (평균 대출 4.3억)</div>
               </div>
             </label>
-
-            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400 transit-label">
+            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400">
               <input type="radio" name="work_hub" value="incheon" class="mt-1 mr-2.5 text-indigo-600 focus:ring-0" />
               <div>
                 <div class="font-bold text-white">인천 바이오·청라·송도 클러스터</div>
@@ -288,8 +257,7 @@
                 <div class="text-[10px] text-slate-400">6.2억 신축 (평균 대출 2.9억)</div>
               </div>
             </label>
-
-            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400 transit-label">
+            <label class="flex items-start p-3 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-indigo-400">
               <input type="radio" name="work_hub" value="prov" class="mt-1 mr-2.5 text-indigo-600 focus:ring-0" />
               <div>
                 <div class="font-bold text-white">지방 혁신도시 / 거점 산업단지</div>
@@ -297,7 +265,6 @@
                 <div class="text-[10px] text-slate-400">4.5억 대장단지 (평균 대출 2.0억)</div>
               </div>
             </label>
-
           </div>
         </div>
 
@@ -328,7 +295,6 @@
 
     <!-- SCREEN 2: ACTIVE GAME PLAY -->
     <section id="screen-game" class="space-y-4 hidden">
-      <!-- Timeline Progress Bar -->
       <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-2xl">
         <div class="flex justify-between items-center text-xs mb-1.5">
           <div class="flex items-center gap-1.5">
@@ -344,7 +310,6 @@
         </div>
       </div>
 
-      <!-- Realtime Asset Snapshot Card -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
         <div class="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl">
           <div class="text-[10px] text-slate-400">보유 부동산 가치</div>
@@ -364,7 +329,6 @@
         </div>
       </div>
 
-      <!-- Current Disaster Card -->
       <div id="event-card" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
         <div class="flex items-start justify-between gap-3 mb-3">
           <div class="flex items-center gap-2">
@@ -384,22 +348,16 @@
           사건 상세 내용
         </p>
 
-        <div id="event-choices" class="space-y-2.5">
-          <!-- Populated by JS -->
-        </div>
+        <div id="event-choices" class="space-y-2.5"></div>
       </div>
     </section>
 
-    <!-- SCREEN 3: 10-YEAR REPORT & SAVE CODE (ENDING) -->
+    <!-- SCREEN 3: 10-YEAR REPORT -->
     <section id="screen-ending" class="space-y-6 hidden">
       <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl text-center">
-        <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-3xl mb-3">
-          🏆
-        </div>
+        <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-3xl mb-3">🏆</div>
         <h2 class="text-xl md:text-2xl font-bold text-white">10년 보유 완주! 첫 집 생존 성공</h2>
-        <p class="text-xs md:text-sm text-slate-400 mt-1">
-          육아휴직 소득 급감, 대출 금리 폭등, 누수 분쟁을 이겨내고 온전한 1세대 1주택 자산을 지켜냈습니다.
-        </p>
+        <p class="text-xs md:text-sm text-slate-400 mt-1">육아휴직 소득 급감, 대출 금리 폭등, 누수 분쟁을 이겨내고 온전한 1세대 1주택 자산을 지켜냈습니다.</p>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6 text-left">
           <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
@@ -422,60 +380,28 @@
 
         <div class="bg-slate-950/80 border border-indigo-500/30 p-4 rounded-xl text-left mb-6">
           <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-bold text-indigo-300">🔑 제2편 [상급지 갈아타기] 연동 세이브 코드</span>
-            </div>
+            <span class="text-xs font-bold text-indigo-300">🔑 제2편 [상급지 갈아타기] 연동 세이브 코드</span>
             <span class="text-[10px] bg-indigo-950 text-indigo-400 px-2 py-0.5 rounded font-mono">자산 계승용</span>
           </div>
-          <p class="text-[11px] text-slate-400 mb-2.5">
-            이 코드를 복사해두면 '제2편 갈아타기'에서 자산과 비과세 자격을 승계받아 시작할 수 있습니다.
-          </p>
           <div class="flex items-center gap-2">
             <input type="text" id="save-code-input" readonly class="w-full bg-slate-900 border border-slate-700 text-xs font-mono text-emerald-400 p-2.5 rounded-lg focus:outline-none" />
-            <button type="button" onclick="copySaveCode()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-lg transition whitespace-nowrap">
-              복사
-            </button>
+            <button type="button" onclick="copySaveCode()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-lg transition whitespace-nowrap">복사</button>
           </div>
           <span id="copy-toast" class="text-[11px] text-emerald-400 mt-1.5 block opacity-0 transition-opacity">클립보드에 복사되었습니다!</span>
         </div>
 
-        <button type="button" onclick="location.reload()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs transition">
-          다른 가족 구성과 직주근접으로 다시 플레이하기
-        </button>
+        <button type="button" onclick="location.reload()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs transition">다른 가족 구성으로 다시 플레이하기</button>
       </div>
     </section>
 
   </main>
 
-  <!-- ================= BOTTOM NAVIGATION ================= -->
-  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 px-4 py-2">
-    <div class="max-w-4xl mx-auto flex justify-around items-center">
-      <button type="button" onclick="openCalcModal()" class="flex flex-col items-center text-slate-400 hover:text-white py-1">
-        <i data-lucide="calculator" class="w-4 h-4"></i>
-        <span class="text-[10px] mt-0.5 font-medium">실전 계산기</span>
-      </button>
-      <button type="button" onclick="openLawModalCurrent()" class="flex flex-col items-center text-slate-400 hover:text-white py-1">
-        <i data-lucide="book-open" class="w-4 h-4"></i>
-        <span class="text-[10px] mt-0.5 font-medium">법률·판례사전</span>
-      </button>
-      <button type="button" onclick="showTipModal()" class="flex flex-col items-center text-slate-400 hover:text-white py-1">
-        <i data-lucide="shield-alert" class="w-4 h-4"></i>
-        <span class="text-[10px] mt-0.5 font-medium">악재 공략집</span>
-      </button>
-    </div>
-  </nav>
-
   <!-- ================= MODALS ================= -->
   <div id="modal-law" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-t-2xl sm:rounded-2xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
       <div class="p-4 border-b border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i data-lucide="scale" class="w-4 h-4 text-indigo-400"></i>
-          <h3 id="modal-law-title" class="text-sm font-bold text-white">법률 & 판례 해설</h3>
-        </div>
-        <button type="button" onclick="closeModal('modal-law')" class="p-1 rounded-lg text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
+        <h3 id="modal-law-title" class="text-sm font-bold text-white">법률 & 판례 해설</h3>
+        <button type="button" onclick="closeModal('modal-law')" class="p-1 rounded-lg text-slate-400 hover:text-white">✕</button>
       </div>
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs leading-relaxed text-slate-300">
         <div>
@@ -494,56 +420,7 @@
     </div>
   </div>
 
-  <div id="modal-calc" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-t-2xl sm:rounded-2xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
-      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i data-lucide="calculator" class="w-4 h-4 text-indigo-400"></i>
-          <h3 class="text-sm font-bold text-white">현장 실무 계산기</h3>
-        </div>
-        <button type="button" onclick="closeModal('modal-calc')" class="p-1 rounded-lg text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-      <div class="flex border-b border-slate-800 bg-slate-950 text-xs">
-        <button type="button" onclick="switchCalcTab('fee')" id="tab-btn-fee" class="flex-1 py-2.5 font-bold text-indigo-400 border-b-2 border-indigo-500 text-center">중개보수(복비)</button>
-        <button type="button" onclick="switchCalcTab('dsr')" id="tab-btn-dsr" class="flex-1 py-2.5 text-slate-400 text-center">스트레스 DSR</button>
-        <button type="button" onclick="switchCalcTab('leave')" id="tab-btn-leave" class="flex-1 py-2.5 text-slate-400 text-center">육휴 상환 시뮬</button>
-      </div>
-      <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-        <div id="calc-pane-fee" class="space-y-3">
-          <div>
-            <label class="block text-slate-400 mb-1">매매 대금 (억원)</label>
-            <input type="number" id="calc-fee-price" value="8" step="0.5" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono" />
-          </div>
-          <button type="button" onclick="runFeeCalc()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-white font-bold">법정 상한 복비 계산</button>
-          <div id="calc-fee-result" class="p-3 bg-slate-950 rounded border border-slate-800 font-mono text-[11px]"></div>
-        </div>
-        <div id="calc-pane-dsr" class="space-y-3 hidden">
-          <div>
-            <label class="block text-slate-400 mb-1">부부합산 연 소득 (만원)</label>
-            <input type="number" id="calc-dsr-income" value="9000" step="100" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono" />
-          </div>
-          <button type="button" onclick="runDsrCalc()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-white font-bold">DSR 40% 한도 산출</button>
-          <div id="calc-dsr-result" class="p-3 bg-slate-950 rounded border border-slate-800 font-mono text-[11px]"></div>
-        </div>
-        <div id="calc-pane-leave" class="space-y-3 hidden">
-          <div>
-            <label class="block text-slate-400 mb-1">주담대 월 원리금 (만원)</label>
-            <input type="number" id="calc-mortgage-monthly" value="210" step="10" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono" />
-          </div>
-          <div>
-            <label class="block text-slate-400 mb-1">휴직 시 부부 총 실수령액 (만원)</label>
-            <input type="number" id="calc-leave-netpay" value="380" step="10" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono" />
-          </div>
-          <button type="button" onclick="runLeaveCalc()" class="w-full py-2 bg-rose-600 hover:bg-rose-500 rounded text-white font-bold">원리금 감당율 분석</button>
-          <div id="calc-leave-result" class="p-3 bg-slate-950 rounded border border-slate-800 font-mono text-[11px]"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <!-- ================= SCRIPT ================= -->
   <script>
     const JOBS = {
       public: { name: '공무원/교사', capital: 14000, income: 4800 },
@@ -566,21 +443,21 @@
     const LEGAL_KNOWLEDGE = {
       dsr: {
         title: "스트레스 DSR 2단계 및 소득증빙 가이드라인",
-        statute: "은행업감독업무시행세칙 제35조: 부부합산 소득 증빙 시 배우자 원천징수영수증 및 소득금액증명원을 필히 제출하며, 차주의 주담대 산정 시 가산금리(수도권 1.2%p)를 의무 합산한다.",
-        precedent: "맞벌이 합산 DSR을 적용하면 한도가 늘어나지만, 일방의 퇴직 또는 육아휴직 시 원리금 감당 비율이 소득의 60%를 초과해 급격한 가계부실로 이어질 수 있음.",
-        script: "'지점장님, 배우자 소득합산으로 대출을 실행하되 차후 육아휴직을 대비해 40년 만기 원리금균등으로 월 납입 부담을 분산하겠습니다.'"
+        statute: "은행업감독업무시행세칙 제35조: 부부합산 소득 증빙 시 배우자 원천징수영수증 및 소득금액증명원을 필히 제출하며 가산금리(수도권 1.2%p)를 의무 합산한다.",
+        precedent: "맞벌이 합산 DSR 적용 후 일방의 육아휴직 시 원리금 감당 비율이 소득의 60%를 초과해 가계 부실 위험 발생 가능.",
+        script: "'지점장님, 배우자 소득합산으로 대출을 실행하되 차후 육아휴직을 대비해 40년 만기 원리금균등으로 월 부담을 분산하겠습니다.'"
       },
       precontract: {
         title: "민법 제565조 (해약금) 및 대법원 2014다231378",
         statute: "매매계약 당시 교부된 계약금은 당사자 간 특별 약정이 없는 한 해약금으로 추정된다.",
-        precedent: "대법원 2014다231378: 가계약금만 일부 건넨 상황이라도 해약금 기준은 실제 입금액이 아니라 '약정 계약금 전액'이다.",
+        precedent: "대법원 2014다231378: 가계약금만 일부 건넨 상황이라도 해약금 기준은 실제 입금액이 아니라 약정 계약금 전액이다.",
         script: "'매도인님, 대법원 2014다231378 판례에 따라 약정 계약금 총액을 기준으로 배액배상하셔야 계약이 해제됩니다.'"
       },
       leave_crisis: {
-        title: "남녀고용평등법 제19조 및 주택담보대출 원리금 상환 유예",
-        statute: "근로자는 만 8세 이하 또는 초등학교 2학년 이하의 자녀를 양육하기 위하여 육아휴직을 신청할 수 있다. 육아휴직 급여는 통상임금의 80%(상한 월 150~250만원 선)로 제한된다.",
-        precedent: "금융감독원 가계대출 취약차주 지원 지침: 육아휴직 또는 실직으로 소득이 급감한 1주택 실거주 차주는 최대 1~3년 원금 상환 유예(이자만 납부) 신청이 가능함.",
-        script: "'은행 대출계 담당자님, 육아휴직으로 인한 일시적 소득 급감 상태입니다. 취약차주 원금 상환유예 제도를 신청하여 이자만 우선 납입하겠습니다.'"
+        title: "남녀고용평등법 제19조 및 주담대 원리금 상환 유예",
+        statute: "근로자는 만 8세 이하 자녀 양육을 위해 육아휴직을 신청할 수 있다. 육아휴직 급여 상한액은 월 150~250만원 선이다.",
+        precedent: "금융감독원 취약차주 지원 지침: 육아휴직 또는 실직으로 소득이 급감한 1주택 실거주 차주는 최대 1~3년 원금 상환 유예 신청이 가능함.",
+        script: "'은행 대출계 담당자님, 육아휴직으로 소득이 일시 급감했습니다. 취약차주 원금 상환유예 제도를 신청하여 이자만 우선 납입하겠습니다.'"
       },
       brokerage: {
         title: "공인중개사법 제32조 및 대법원 2000다48265 전원합의체",
@@ -589,16 +466,16 @@
         script: "'소장님, 법정 상한 요율은 0.4%입니다. 초과 요구는 공인중개사법 제33조 위반이므로 0.4%에 정산하겠습니다.'"
       },
       latent_defect: {
-        title: "민법 제580조(매도인의 하자담보책임) 및 제582조",
+        title: "민법 제580조(하자담보책임) 및 제582조",
         statute: "매매 목적물에 하자가 있을 때 매수인은 안 날로부터 6개월 내에 손해배상을 청구할 수 있다.",
-        precedent: "대법원 99다63388: '현 상태대로 매매' 특약이 있어도 매수인이 계약 당시 알 수 없었던 노후 배관 누수는 매도인이 수리비를 배상해야 함.",
+        precedent: "대법원 99다63388: 현 상태대로 매매 특약이 있어도 계약 당시 알 수 없었던 노후 배관 누수는 매도인이 배상해야 함.",
         script: "'매도인님, 잔금 전부터 배관에 잠재되어 있던 하자는 민법 제580조에 따라 매도인 전액 배상 책임입니다. 견적서 송부합니다.'"
       },
       insurance_leak: {
         title: "상법 제680조(손해방지의무) 및 일상생활배상책임",
-        statute: "피보험자는 손해 경감을 위해 노력해야 하며 필요한 비용은 보험자가 부담한다.",
+        statute: "피보험자는 손해 경감을 위해 노력해야 하며 필요한 유익 비용은 보험자가 부담한다.",
         precedent: "대법원 2020다277025: 아랫집 누수를 막기 위한 가해 세대 내부 배관 굴착·탐지비도 손해방지비용으로 보험사가 지급해야 함.",
-        script: "'보험사 담당자님, 대법원 2020다277025 판례에 의거하여 아랫집 피해 복구비뿐 아니라 저희 집 누수탐지 굴착비도 전액 청구합니다.'"
+        script: "'보험사 담당자님, 대법원 2020다277025 판례에 의거하여 아랫집 피해 복구비 및 저희 집 누수탐지 굴착비 전액을 청구합니다.'"
       },
       noise: {
         title: "공동주택관리법 제20조 (층간소음 방지)",
@@ -608,8 +485,8 @@
       },
       tax_exemption: {
         title: "소득세법 제89조 (1세대 1주택 비과세)",
-        statute: "1세대가 1주택을 2년 이상(취득 당시 조정지역인 경우 거주 2년) 보유한 경우 양도가액 12억원까지 비과세된다.",
-        precedent: "10년 이상 장기보유 및 거주 시 장기보유특별공제 최대 80%가 적용되어 세부담이 거의 전무함.",
+        statute: "1세대가 1주택을 2년 이상 보유한 경우 양도가액 12억원까지 비과세된다.",
+        precedent: "10년 이상 장기보유 및 거주 시 장기보유특별공제 최대 80%가 적용되어 세부담이 극도로 미미해짐.",
         script: "'세무사님, 실거주 10년을 채운 1세대 1주택자이므로 12억 비과세 및 장특공 80%를 전액 적용해 신고합니다.'"
       }
     };
@@ -1037,7 +914,7 @@
 
       gameState.currentStep = 0;
       renderEventStep(0);
-      lucide.createIcons();
+      try { lucide.createIcons(); } catch(e){}
     }
 
     function calculateNetWorth() {
@@ -1217,83 +1094,16 @@
       document.getElementById('modal-law-script').innerText = law.script;
 
       document.getElementById('modal-law').classList.remove('hidden');
-      lucide.createIcons();
-    }
-
-    function openCalcModal() {
-      document.getElementById('modal-calc').classList.remove('hidden');
-      lucide.createIcons();
-    }
-
-    function showTipModal() {
-      alert(`💡 [부동산 악재 핵심 수칙]
-
-1. 육아휴직으로 소득이 급감했을 땐 연체하지 말고 정부 취약차주 원금상환유예 제도를 신청하세요.
-2. 누수는 민법 580조로 매도인에게 6개월 내 내용증명을 보내 수리비를 청구합니다.
-3. 화재보험과 일상생활배상책임특약(일배책)은 아랫집 누수 피해 수천만원을 막아주는 최강의 방패입니다.`);
+      try { lucide.createIcons(); } catch(e){}
     }
 
     function closeModal(id) {
       document.getElementById(id).classList.add('hidden');
     }
 
-    function switchCalcTab(tab) {
-      ['fee', 'dsr', 'leave'].forEach(t => {
-        document.getElementById(`calc-pane-${t}`).classList.add('hidden');
-        document.getElementById(`tab-btn-${t}`).className = "flex-1 py-2.5 text-slate-400 text-center";
-      });
-      document.getElementById(`calc-pane-${tab}`).classList.remove('hidden');
-      document.getElementById(`tab-btn-${tab}`).className = "flex-1 py-2.5 font-bold text-indigo-400 border-b-2 border-indigo-500 text-center";
-    }
-
-    function runFeeCalc() {
-      const priceEok = parseFloat(document.getElementById('calc-fee-price').value) || 0;
-      const priceWon = priceEok * 100000000;
-      let rate = 0.004;
-      let limitMsg = "0.4% (6억~9억 구간)";
-
-      if (priceWon < 200000000) { rate = 0.005; limitMsg = "0.5% (한도 80만원)"; }
-      else if (priceWon < 600000000) { rate = 0.004; limitMsg = "0.4% (2억~6억 구간)"; }
-      else if (priceWon < 900000000) { rate = 0.004; limitMsg = "0.4% (6억~9억 구간)"; }
-      else if (priceWon < 1200000000) { rate = 0.005; limitMsg = "0.5% (9억~12억 구간)"; }
-      else { rate = 0.007; limitMsg = "0.7% 상한 협의"; }
-
-      let fee = Math.floor(priceWon * rate);
-      let vat = Math.floor(fee * 0.1);
-
-      document.getElementById('calc-fee-result').innerHTML = `
-        <div class="text-slate-400">적용 구간: <span class="text-white font-bold">${limitMsg}</span></div>
-        <div class="text-slate-400">법정 중개보수 상한: <span class="text-emerald-400 font-bold">${(fee / 10000).toLocaleString()}만 원</span></div>
-        <div class="text-slate-400">부가세(10%) 포함: <span class="text-indigo-400 font-bold">${((fee + vat) / 10000).toLocaleString()}만 원</span></div>
-      `;
-    }
-
-    function runDsrCalc() {
-      const income = parseFloat(document.getElementById('calc-dsr-income').value) || 9000;
-      const annualAllowed = income * 0.40;
-      const approxLoanLimit = Math.round(annualAllowed / 0.057);
-
-      document.getElementById('calc-dsr-result').innerHTML = `
-        <div class="text-slate-400">부부 연간 최대 원리금: <span class="text-white font-bold">${Math.round(annualAllowed).toLocaleString()}만 원 / 년</span></div>
-        <div class="text-slate-400">합산 주담대 최대 한도: <span class="text-emerald-400 font-bold">약 ${(approxLoanLimit / 10000).toFixed(2)}억 원</span> (40년 분할)</div>
-      `;
-    }
-
-    function runLeaveCalc() {
-      const mortgage = parseFloat(document.getElementById('calc-mortgage-monthly').value) || 210;
-      const netPay = parseFloat(document.getElementById('calc-leave-netpay').value) || 380;
-      const ratio = ((mortgage / netPay) * 100).toFixed(1);
-      const isDanger = ratio > 50;
-
-      document.getElementById('calc-leave-result').innerHTML = `
-        <div class="text-slate-400">휴직기 원리금 비중: <span class="${isDanger ? 'text-rose-400' : 'text-emerald-400'} font-bold">${ratio}%</span></div>
-        <div class="text-[11px] text-slate-300 mt-1">${isDanger ? '⚠️ 경고: 소득의 50% 이상이 원리금으로 지출되어 기저귀·분유값 부족 사태가 발생할 수 있습니다. 상환유예를 고려하세요.' : '✅ 안정: 잔여 가처분소득으로 생활비 유지가 가능합니다.'}</div>
-      `;
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
       updateIncomeCalc();
-      lucide.createIcons();
+      try { lucide.createIcons(); } catch(e){}
     });
   </script>
 </body>
