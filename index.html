@@ -4,20 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>부동산 악재 생존기: 제1편 첫 집 마련 10년의 여정</title>
+  <meta name="description" content="첫 집 마련 과정에서 겪는 실전 부동산 법률 및 금융 악재 시뮬레이션 게임" />
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
   <style>
     body {
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
       padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
     .custom-scroll::-webkit-scrollbar {
       width: 4px;
@@ -32,7 +55,7 @@
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-[100dvh] flex flex-col antialiased overflow-x-hidden">
+<body class="bg-slate-950 text-slate-100 min-h-[100dvh] flex flex-col font-sans antialiased overflow-x-hidden">
 
   <!-- ================= HEADER ================= -->
   <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-2.5">
@@ -119,7 +142,7 @@
           <input type="range" id="input-age" min="26" max="48" value="32" oninput="updateAge()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer" />
         </div>
 
-        <!-- 3. Marital Status & Children Section -->
+        <!-- 3. Marital Status & Dual Income & Children Section -->
         <div class="bg-slate-950/60 p-4 md:p-5 rounded-xl border border-slate-800 mb-5 space-y-4">
           <div>
             <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
@@ -135,7 +158,7 @@
             </div>
           </div>
 
-          <!-- Married Options Box -->
+          <!-- Married Details (Dynamic) -->
           <div id="married-options" class="space-y-4 pt-2 border-t border-slate-800/80">
             <div>
               <label class="block text-xs text-slate-400 mb-1.5">가구 소득 형태</label>
@@ -149,7 +172,6 @@
               </div>
             </div>
 
-            <!-- Spouse Income -->
             <div id="spouse-income-box" class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/60 p-3 rounded-lg border border-slate-800">
               <div>
                 <label class="block text-[11px] text-slate-400 mb-1">배우자 연소득 (만원)</label>
@@ -161,7 +183,6 @@
               </div>
             </div>
 
-            <!-- Children Count -->
             <div>
               <label class="block text-xs text-slate-400 mb-1.5">자녀 계획 / 현황</label>
               <div class="grid grid-cols-4 gap-2">
@@ -172,7 +193,6 @@
               </div>
             </div>
 
-            <!-- Parental Leave -->
             <div id="leave-option-box">
               <label class="block text-xs text-slate-400 mb-1.5">
                 출산 시 육아휴직 계획 <span class="text-rose-400 font-semibold">(소득 급감 & 주담대 원리금 위험)</span>
@@ -180,7 +200,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button type="button" onclick="setLeaveType('none')" id="leave-btn-none" class="leave-btn p-2 rounded-lg border border-slate-800 bg-slate-900 text-left">
                   <div class="text-xs font-bold text-slate-300">휴직 미사용</div>
-                  <div class="text-[10px] text-slate-400 mt-0.5">양가 조모 양육/입주 시터</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">양가 조모 양육/입주 베이비시터</div>
                 </button>
                 <button type="button" onclick="setLeaveType('one')" id="leave-btn-one" class="leave-btn p-2 rounded-lg border border-indigo-600 bg-indigo-950/50 text-left">
                   <div class="text-xs font-bold text-indigo-300">한 명만 1년 사용</div>
@@ -195,7 +215,7 @@
           </div>
         </div>
 
-        <!-- 4. Expanded Transit & Workplace Hubs -->
+        <!-- 4. Expanded Transit & Workplace Hubs (8 Options) -->
         <div class="mb-5">
           <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
             직주근접 권역 & 통근 노선망 (매물 후보지 및 시세 결정)
@@ -295,6 +315,19 @@
 
     <!-- SCREEN 2: ACTIVE GAME PLAY -->
     <section id="screen-game" class="space-y-4 hidden">
+      <!-- Navigation & Undo Bar -->
+      <div class="flex items-center justify-between gap-2">
+        <button type="button" onclick="undoLastTurn()" id="btn-undo" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-300 transition">
+          <i data-lucide="undo-2" class="w-3.5 h-3.5 text-indigo-400"></i>
+          <span id="btn-undo-text">이전으로 돌아가기</span>
+        </button>
+        <button type="button" onclick="resetToSetup()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-400 transition">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+          <span>처음 설정으로</span>
+        </button>
+      </div>
+
+      <!-- Timeline Progress Bar -->
       <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-2xl">
         <div class="flex justify-between items-center text-xs mb-1.5">
           <div class="flex items-center gap-1.5">
@@ -310,6 +343,7 @@
         </div>
       </div>
 
+      <!-- Realtime Asset Snapshot Card -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
         <div class="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl">
           <div class="text-[10px] text-slate-400">보유 부동산 가치</div>
@@ -329,6 +363,7 @@
         </div>
       </div>
 
+      <!-- Current Disaster Card -->
       <div id="event-card" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
         <div class="flex items-start justify-between gap-3 mb-3">
           <div class="flex items-center gap-2">
@@ -348,7 +383,25 @@
           사건 상세 내용
         </p>
 
+        <!-- Choices Container -->
         <div id="event-choices" class="space-y-2.5"></div>
+
+        <!-- Choice Result Overlay / Panel (Appears after making a choice) -->
+        <div id="choice-result-panel" class="hidden mt-4 pt-4 border-t border-slate-800 space-y-3">
+          <div id="result-status-box" class="p-3.5 rounded-xl border text-xs leading-relaxed">
+            <!-- Dynamic feedback text -->
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="undoCurrentChoice()" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 active:scale-[0.99] border border-slate-700 rounded-xl text-xs font-bold text-slate-200 transition flex items-center justify-center gap-1.5">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-amber-400"></i>
+              <span>선택 다시 하기</span>
+            </button>
+            <button type="button" onclick="proceedToNextStep()" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.99] rounded-xl text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-1.5">
+              <span>다음 연차로 진행</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -396,6 +449,24 @@
 
   </main>
 
+  <!-- ================= BOTTOM NAVIGATION ================= -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 px-4 py-2">
+    <div class="max-w-4xl mx-auto flex justify-around items-center">
+      <button type="button" onclick="openCalcModal()" class="flex flex-col items-center text-slate-400 hover:text-white py-1">
+        <i data-lucide="calculator" class="w-4 h-4"></i>
+        <span class="text-[10px] mt-0.5 font-medium">실전 계산기</span>
+      </button>
+      <button type="button" onclick="openLawModalCurrent()" class="flex flex-col items-center text-slate-400 hover:text-white py-1">
+        <i data-lucide="book-open" class="w-4 h-4"></i>
+        <span class="text-[10px] mt-0.5 font-medium">법률·판례사전</span>
+      </button>
+      <button type="button" onclick="showTipModal()" class="flex flex-col items-center text-slate-400 hover:text-white py-1">
+        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+        <span class="text-[10px] mt-0.5 font-medium">악재 공략집</span>
+      </button>
+    </div>
+  </nav>
+
   <!-- ================= MODALS ================= -->
   <div id="modal-law" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-t-2xl sm:rounded-2xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
@@ -415,6 +486,53 @@
         <div>
           <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wide">실전 현장 협상 스크립트</span>
           <div id="modal-law-script" class="mt-1 p-3 rounded-lg bg-amber-950/20 text-amber-200 border border-amber-500/20"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-calc" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-t-2xl sm:rounded-2xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="calculator" class="w-4 h-4 text-indigo-400"></i>
+          <h3 class="text-sm font-bold text-white">현장 실무 계산기</h3>
+        </div>
+        <button type="button" onclick="closeModal('modal-calc')" class="p-1 rounded-lg text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div class="flex border-b border-slate-800 bg-slate-950 text-xs">
+        <button type="button" onclick="switchCalcTab('fee')" id="tab-btn-fee" class="flex-1 py-2.5 font-bold text-indigo-400 border-b-2 border-indigo-500 text-center">중개보수(복비)</button>
+        <button type="button" onclick="switchCalcTab('dsr')" id="tab-btn-dsr" class="flex-1 py-2.5 text-slate-400 text-center">스트레스 DSR</button>
+        <button type="button" onclick="switchCalcTab('leave')" id="tab-btn-leave" class="flex-1 py-2.5 text-slate-400 text-center">육휴 상환 시뮬</button>
+      </div>
+      <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <div id="calc-pane-fee" class="space-y-3">
+          <div>
+            <label class="block text-slate-400 mb-1">매매 대금 (억원)</label>
+            <input type="number" id="calc-fee-price" value="8" step="0.5" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono" />
+          </div>
+          <button type="button" onclick="runFeeCalc()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-white font-bold">법정 상한 복비 계산</button>
+          <div id="calc-fee-result" class="p-3 bg-slate-950 rounded border border-slate-800 font-mono text-[11px]"></div>
+        </div>
+        <div id="calc-pane-dsr" class="space-y-3 hidden">
+          <div>
+            <label class="block text-slate-400 mb-1">부부합산 연 소득 (만원)</label>
+            <input type="number" id="calc-dsr-income" value="9000" step="100" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono" />
+          </div>
+          <button type="button" onclick="runDsrCalc()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 rounded text-white font-bold">DSR 40% 한도 산출</button>
+          <div id="calc-dsr-result" class="p-3 bg-slate-950 rounded border border-slate-800 font-mono text-[11px]"></div>
+        </div>
+        <div id="calc-pane-leave" class="space-y-3 hidden">
+          <div>
+            <label class="block text-slate-400 mb-1">주담대 월 원리금 (만원)</label>
+            <input type="number" id="calc-mortgage-monthly" value="210" step="10" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono" />
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">휴직 시 부부 총 실수령액 (만원)</label>
+            <input type="number" id="calc-leave-netpay" value="380" step="10" class="w-full bg-slate-950 border border-slate-700 p-2 rounded text-white font-mono" />
+          </div>
+          <button type="button" onclick="runLeaveCalc()" class="w-full py-2 bg-rose-600 hover:bg-rose-500 rounded text-white font-bold">원리금 감당율 분석</button>
+          <div id="calc-leave-result" class="p-3 bg-slate-950 rounded border border-slate-800 font-mono text-[11px]"></div>
         </div>
       </div>
     </div>
@@ -491,7 +609,7 @@
       }
     };
 
-    const gameState = {
+    let gameState = {
       selectedJob: 'public',
       currentAge: 32,
       maritalStatus: 'married',
@@ -510,6 +628,9 @@
       mentalGauge: 100,
       defendedEvents: 0
     };
+
+    let turnHistory = [];
+    let pendingChoiceSnapshot = null;
 
     function setJob(jobKey) {
       gameState.selectedJob = jobKey;
@@ -903,6 +1024,8 @@
       gameState.hasInsurance = document.getElementById('toggle-insurance').checked;
 
       dynamicEvents = buildDynamicEvents();
+      turnHistory = [];
+      pendingChoiceSnapshot = null;
       calculateNetWorth();
 
       document.getElementById('screen-setup').classList.add('hidden');
@@ -958,9 +1081,18 @@
         return;
       }
 
+      document.getElementById('choice-result-panel').classList.add('hidden');
+
       const ev = dynamicEvents[stepIndex];
       const currentYear = ev.year;
       const effectiveAge = gameState.currentAge + (currentYear - 1);
+
+      const undoText = document.getElementById('btn-undo-text');
+      if (stepIndex === 0) {
+        undoText.innerText = "설정 화면으로";
+      } else {
+        undoText.innerText = `${stepIndex}년차로 되돌리기`;
+      }
 
       document.getElementById('game-year-pill').innerText = `${currentYear}년차`;
       document.getElementById('game-phase-name').innerText = ev.phase;
@@ -985,7 +1117,8 @@
       ev.choices.forEach((choice, idx) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = "w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:border-indigo-500 hover:bg-slate-900/90 active:scale-[0.99] transition flex items-start gap-3 group";
+        btn.id = `choice-opt-${idx}`;
+        btn.className = "choice-btn w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:border-indigo-500 hover:bg-slate-900/90 active:scale-[0.99] transition flex items-start gap-3 group";
 
         btn.innerHTML = `
           <span class="bg-slate-800 text-slate-300 group-hover:bg-indigo-600 group-hover:text-white text-xs font-mono font-bold w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
@@ -996,29 +1129,25 @@
         btn.onclick = () => handleChoiceSelect(stepIndex, idx);
         choicesContainer.appendChild(btn);
       });
-
-      if (stepIndex > 0) {
-        gameState.houseValue += 1300;
-        if (gameState.mortgageDebt > 800) {
-          gameState.mortgageDebt -= 800;
-        }
-        calculateNetWorth();
-      }
+      try { lucide.createIcons(); } catch(e){}
     }
 
     function handleChoiceSelect(stepIndex, choiceIndex) {
+      pendingChoiceSnapshot = JSON.parse(JSON.stringify(gameState));
+
       const ev = dynamicEvents[stepIndex];
       const choice = ev.choices[choiceIndex];
 
       let extraFeedback = "";
+      let appliedCash = choice.cash || 0;
 
       if (choice.insuranceCheck && !gameState.hasInsurance) {
-        choice.cash = -1500;
-        extraFeedback = " (⚠️ 사전 화재·일배책 보험에 미가입되어 있어 1,500만원 전액을 사비로 물어냈습니다!)";
+        appliedCash = -1500;
+        extraFeedback = "<br><span class='text-rose-400 font-bold'>⚠️ [사전 보험 미가입 패널티]</span> 화재·일배책 보험에 가입하지 않아 1,500만원 전액을 사비로 물어냈습니다!";
       }
 
       gameState.mentalGauge += choice.mental;
-      gameState.liquidCash += (choice.cash || 0);
+      gameState.liquidCash += appliedCash;
       gameState.mortgageDebt += (choice.debt || 0);
 
       if (choice.mental >= 0) {
@@ -1026,16 +1155,107 @@
       }
 
       calculateNetWorth();
-      alert(`${choice.feedback}${extraFeedback}`);
+
+      document.querySelectorAll('.choice-btn').forEach((b, i) => {
+        if (i === choiceIndex) {
+          b.className = "choice-btn w-full text-left p-3.5 rounded-xl border border-indigo-500 bg-indigo-950/50 flex items-start gap-3";
+        } else {
+          b.className = "choice-btn w-full text-left p-3.5 rounded-xl border border-slate-900 bg-slate-950/30 opacity-40 flex items-start gap-3 cursor-not-allowed";
+          b.disabled = true;
+        }
+      });
+
+      const resPanel = document.getElementById('choice-result-panel');
+      const statusBox = document.getElementById('result-status-box');
+
+      const isPositive = choice.mental >= 0;
+      statusBox.className = isPositive
+        ? "p-3.5 rounded-xl border border-emerald-500/40 bg-emerald-950/30 text-emerald-200 text-xs leading-relaxed"
+        : "p-3.5 rounded-xl border border-rose-500/40 bg-rose-950/30 text-rose-200 text-xs leading-relaxed";
+
+      const impactTags = [];
+      if (choice.mental !== 0) {
+        impactTags.push(choice.mental > 0 ? `<span class="text-emerald-400 font-bold">멘탈 +${choice.mental}</span>` : `<span class="text-rose-400 font-bold">멘탈 ${choice.mental}</span>`);
+      }
+      if (appliedCash !== 0) {
+        impactTags.push(appliedCash > 0 ? `<span class="text-emerald-400 font-bold">현금 +${appliedCash}만</span>` : `<span class="text-rose-400 font-bold">현금 ${appliedCash}만</span>`);
+      }
+      if (choice.debt) {
+        impactTags.push(`<span class="text-amber-400 font-bold">대출 +${choice.debt}만</span>`);
+      }
+
+      statusBox.innerHTML = `
+        <div class="flex items-center gap-2 mb-1.5 font-bold">
+          <span>${isPositive ? '✅ 위기 방어 성공!' : '⚠️ 악재 충격 발생!'}</span>
+          <div class="flex gap-2 text-[11px] font-mono">${impactTags.join(' · ')}</div>
+        </div>
+        <div>${choice.feedback}${extraFeedback}</div>
+      `;
+
+      resPanel.classList.remove('hidden');
+      try { lucide.createIcons(); } catch(e){}
 
       if (gameState.mentalGauge <= 0) {
-        alert("⚠️ 멘탈 게이지가 0에 도달했습니다! 지속적인 부동산 악재와 스트레스로 인해 공황 상태에서 집을 헐값에 매각하고 전세로 회귀했습니다.");
-        location.reload();
+        setTimeout(() => {
+          alert("⚠️ 멘탈 게이지가 0에 도달했습니다! 지속적인 부동산 악재와 스트레스로 인해 공황 상태에서 집을 헐값에 매각하고 전세로 회귀했습니다.\n\n[선택 다시 하기]로 직전 선택을 취소하거나 처음부터 다시 시작할 수 있습니다.");
+        }, 100);
+      }
+    }
+
+    function undoCurrentChoice() {
+      if (pendingChoiceSnapshot) {
+        gameState = JSON.parse(JSON.stringify(pendingChoiceSnapshot));
+        calculateNetWorth();
+        renderEventStep(gameState.currentStep);
+      }
+    }
+
+    function proceedToNextStep() {
+      if (gameState.mentalGauge <= 0) {
+        alert("멘탈이 0인 상태에서는 다음으로 진행할 수 없습니다. '선택 다시 하기'를 눌러 현명한 선택지로 방어하세요!");
         return;
       }
 
+      turnHistory.push(JSON.parse(JSON.stringify({
+        state: pendingChoiceSnapshot,
+        step: gameState.currentStep
+      })));
+
+      gameState.houseValue += 1300;
+      if (gameState.mortgageDebt > 800) {
+        gameState.mortgageDebt -= 800;
+      }
+      calculateNetWorth();
+
       gameState.currentStep++;
       renderEventStep(gameState.currentStep);
+    }
+
+    function undoLastTurn() {
+      if (gameState.currentStep === 0) {
+        resetToSetup();
+        return;
+      }
+
+      if (turnHistory.length > 0) {
+        const lastRecord = turnHistory.pop();
+        gameState = JSON.parse(JSON.stringify(lastRecord.state));
+        gameState.currentStep = lastRecord.step;
+        calculateNetWorth();
+        renderEventStep(gameState.currentStep);
+      } else {
+        gameState.currentStep = 0;
+        renderEventStep(0);
+      }
+    }
+
+    function resetToSetup() {
+      if (confirm("초기 설정 화면으로 돌아가시겠습니까? 현재 진행 상황이 리셋됩니다.")) {
+        document.getElementById('screen-game').classList.add('hidden');
+        document.getElementById('screen-ending').classList.add('hidden');
+        document.getElementById('status-badges').classList.add('hidden');
+        document.getElementById('screen-setup').classList.remove('hidden');
+      }
     }
 
     function showEndingScreen() {
@@ -1097,8 +1317,75 @@
       try { lucide.createIcons(); } catch(e){}
     }
 
+    function openCalcModal() {
+      document.getElementById('modal-calc').classList.remove('hidden');
+      try { lucide.createIcons(); } catch(e){}
+    }
+
+    function showTipModal() {
+      alert(`💡 [부동산 악재 핵심 수칙]
+
+1. 육아휴직으로 소득이 급감했을 땐 연체하지 말고 정부 취약차주 원금상환유예 제도를 신청하세요.
+2. 누수는 민법 580조로 매도인에게 6개월 내 내용증명을 보내 수리비를 청구합니다.
+3. 화재보험과 일상생활배상책임특약(일배책)은 아랫집 누수 피해 수천만원을 막아주는 최강의 방패입니다.`);
+    }
+
     function closeModal(id) {
       document.getElementById(id).classList.add('hidden');
+    }
+
+    function switchCalcTab(tab) {
+      ['fee', 'dsr', 'leave'].forEach(t => {
+        document.getElementById(`calc-pane-${t}`).classList.add('hidden');
+        document.getElementById(`tab-btn-${t}`).className = "flex-1 py-2.5 text-slate-400 text-center";
+      });
+      document.getElementById(`calc-pane-${tab}`).classList.remove('hidden');
+      document.getElementById(`tab-btn-${tab}`).className = "flex-1 py-2.5 font-bold text-indigo-400 border-b-2 border-indigo-500 text-center";
+    }
+
+    function runFeeCalc() {
+      const priceEok = parseFloat(document.getElementById('calc-fee-price').value) || 0;
+      const priceWon = priceEok * 100000000;
+      let rate = 0.004;
+      let limitMsg = "0.4% (6억~9억 구간)";
+
+      if (priceWon < 200000000) { rate = 0.005; limitMsg = "0.5% (한도 80만원)"; }
+      else if (priceWon < 600000000) { rate = 0.004; limitMsg = "0.4% (2억~6억 구간)"; }
+      else if (priceWon < 900000000) { rate = 0.004; limitMsg = "0.4% (6억~9억 구간)"; }
+      else if (priceWon < 1200000000) { rate = 0.005; limitMsg = "0.5% (9억~12억 구간)"; }
+      else { rate = 0.007; limitMsg = "0.7% 상한 협의"; }
+
+      let fee = Math.floor(priceWon * rate);
+      let vat = Math.floor(fee * 0.1);
+
+      document.getElementById('calc-fee-result').innerHTML = `
+        <div class="text-slate-400">적용 구간: <span class="text-white font-bold">${limitMsg}</span></div>
+        <div class="text-slate-400">법정 중개보수 상한: <span class="text-emerald-400 font-bold">${(fee / 10000).toLocaleString()}만 원</span></div>
+        <div class="text-slate-400">부가세(10%) 포함: <span class="text-indigo-400 font-bold">${((fee + vat) / 10000).toLocaleString()}만 원</span></div>
+      `;
+    }
+
+    function runDsrCalc() {
+      const income = parseFloat(document.getElementById('calc-dsr-income').value) || 9000;
+      const annualAllowed = income * 0.40;
+      const approxLoanLimit = Math.round(annualAllowed / 0.057);
+
+      document.getElementById('calc-dsr-result').innerHTML = `
+        <div class="text-slate-400">부부 연간 최대 원리금: <span class="text-white font-bold">${Math.round(annualAllowed).toLocaleString()}만 원 / 년</span></div>
+        <div class="text-slate-400">합산 주담대 최대 한도: <span class="text-emerald-400 font-bold">약 ${(approxLoanLimit / 10000).toFixed(2)}억 원</span> (40년 분할)</div>
+      `;
+    }
+
+    function runLeaveCalc() {
+      const mortgage = parseFloat(document.getElementById('calc-mortgage-monthly').value) || 210;
+      const netPay = parseFloat(document.getElementById('calc-leave-netpay').value) || 380;
+      const ratio = ((mortgage / netPay) * 100).toFixed(1);
+      const isDanger = ratio > 50;
+
+      document.getElementById('calc-leave-result').innerHTML = `
+        <div class="text-slate-400">휴직기 원리금 비중: <span class="${isDanger ? 'text-rose-400' : 'text-emerald-400'} font-bold">${ratio}%</span></div>
+        <div class="text-[11px] text-slate-300 mt-1">${isDanger ? '⚠️ 경고: 소득의 50% 이상이 원리금으로 지출되어 기저귀·분유값 부족 사태가 발생할 수 있습니다. 상환유예를 고려하세요.' : '✅ 안정: 잔여 가처분소득으로 생활비 유지가 가능합니다.'}</div>
+      `;
     }
 
     window.addEventListener('DOMContentLoaded', () => {
