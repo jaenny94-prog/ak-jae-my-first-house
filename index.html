@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>부동산 악재 생존기: 제1편 첫 집 마련 10년의 여정</title>
-  <meta name="description" content="첫 집 마련 과정에서 겪는 실전 부동산 법률 및 금융 악재 시뮬레이션 게임" />
+  <title>부동산 악재 생존기: 제1편 첫 집 마련 하이퍼리얼리즘</title>
+  <meta name="description" content="첫 집 마련에서 벌어질 수 있는 모든 악재와 실전 법률 대응 시뮬레이션" />
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -65,7 +65,7 @@
         <div>
           <div class="flex items-center space-x-2">
             <h1 class="text-sm font-bold tracking-tight text-white">부동산 악재 생존기</h1>
-            <span class="text-[10px] bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 px-1.5 py-0.5 rounded font-mono font-medium">제1편 첫집마련</span>
+            <span class="text-[10px] bg-rose-600/30 text-rose-400 border border-rose-500/30 px-1.5 py-0.5 rounded font-mono font-medium">하드코어 리얼리즘</span>
           </div>
           <p id="top-char-summary" class="text-[11px] text-slate-400">가구 프로필 설정 대기 중</p>
         </div>
@@ -79,7 +79,7 @@
         </div>
         <div class="h-6 w-[1px] bg-slate-800"></div>
         <div class="flex flex-col items-end">
-          <span class="text-[10px] text-slate-400">멘탈 게이지</span>
+          <span class="text-[10px] text-slate-400">멘탈 수치</span>
           <div class="flex items-center space-x-1">
             <div class="w-16 bg-slate-800 h-2 rounded-full overflow-hidden">
               <div id="badge-mental-bar" class="bg-indigo-500 h-full rounded-full transition-all duration-300" style="width: 100%"></div>
@@ -98,37 +98,42 @@
     <section id="screen-setup" class="space-y-6">
       <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 md:p-7 shadow-xl backdrop-blur-sm">
         <div class="border-b border-slate-800 pb-4 mb-5">
-          <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
-            <span>👤</span> 가구 생애주기 & 직주근접 설정
-          </h2>
-          <p class="text-xs md:text-sm text-slate-400 mt-1">혼인 여부, 맞벌이 소득, 육아휴직 및 통근 권역을 정밀하게 반영합니다.</p>
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+              <span>👤</span> 첫 집 마련 생존 프로필 설정
+            </h2>
+            <span class="text-[11px] bg-indigo-950 text-indigo-400 px-2 py-0.5 rounded border border-indigo-800">총 22개 실전 악재 수록</span>
+          </div>
+          <p class="text-xs md:text-sm text-slate-400 mt-1">
+            소득 증빙 형태, 부모 지원 리스크, 맞벌이 DSR, 직주근접 노선망에 따라 터지는 악재의 강도가 결정됩니다.
+          </p>
         </div>
 
         <!-- 1. Job Selection -->
         <div class="mb-5">
           <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-            본인 직업군 & 기본 소득
+            본인 직업군 & 대출 심사 스탯
           </label>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
             <button type="button" onclick="setJob('public')" id="job-public" class="job-btn p-3 rounded-xl border border-indigo-600 bg-indigo-950/40 text-left transition">
               <div class="text-sm font-bold">🏛️ 공무원/교사</div>
-              <div class="text-[11px] text-indigo-300 font-medium mt-0.5">연 4,800만원</div>
-              <div class="text-[10px] text-slate-400">호봉제 / 육휴 안정</div>
+              <div class="text-[11px] text-indigo-300 font-medium mt-0.5">연 4,800만원 / 호봉제</div>
+              <div class="text-[10px] text-slate-400">고용안정 / 기본급 DSR 벽</div>
             </button>
             <button type="button" onclick="setJob('corp')" id="job-corp" class="job-btn p-3 rounded-xl border border-slate-800 bg-slate-900/80 text-left transition">
               <div class="text-sm font-bold">🏢 대기업 정규직</div>
-              <div class="text-[11px] text-emerald-400 font-medium mt-0.5">연 8,500만원</div>
-              <div class="text-[10px] text-slate-400">고소득 / 성과급 변동</div>
+              <div class="text-[11px] text-emerald-400 font-medium mt-0.5">연 8,500만원 / 성과급형</div>
+              <div class="text-[10px] text-slate-400">대출한도 여유 / 성과급 쇼크</div>
             </button>
             <button type="button" onclick="setJob('sme')" id="job-sme" class="job-btn p-3 rounded-xl border border-slate-800 bg-slate-900/80 text-left transition">
               <div class="text-sm font-bold">🏭 중견·중소기업</div>
-              <div class="text-[11px] text-amber-400 font-medium mt-0.5">연 3,900만원</div>
-              <div class="text-[10px] text-slate-400">정책대출 특례 대상</div>
+              <div class="text-[11px] text-amber-400 font-medium mt-0.5">연 3,900만원 / 수당형</div>
+              <div class="text-[10px] text-slate-400">정책대출 특례 / 비과세 제외</div>
             </button>
             <button type="button" onclick="setJob('freelancer')" id="job-freelancer" class="job-btn p-3 rounded-xl border border-slate-800 bg-slate-900/80 text-left transition">
               <div class="text-sm font-bold">💻 프리랜서/사업</div>
-              <div class="text-[11px] text-purple-400 font-medium mt-0.5">연 5,800만원</div>
-              <div class="text-[10px] text-slate-400">종소세 증빙 / 현금형</div>
+              <div class="text-[11px] text-purple-400 font-medium mt-0.5">연 5,800만원 / 현금형</div>
+              <div class="text-[10px] text-slate-400">소득증빙 지옥 / 종소세 경비</div>
             </button>
           </div>
         </div>
@@ -158,7 +163,7 @@
             </div>
           </div>
 
-          <!-- Married Details (Dynamic) -->
+          <!-- Married Options Box -->
           <div id="married-options" class="space-y-4 pt-2 border-t border-slate-800/80">
             <div>
               <label class="block text-xs text-slate-400 mb-1.5">가구 소득 형태</label>
@@ -172,6 +177,7 @@
               </div>
             </div>
 
+            <!-- Spouse Income -->
             <div id="spouse-income-box" class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/60 p-3 rounded-lg border border-slate-800">
               <div>
                 <label class="block text-[11px] text-slate-400 mb-1">배우자 연소득 (만원)</label>
@@ -183,6 +189,7 @@
               </div>
             </div>
 
+            <!-- Children Count -->
             <div>
               <label class="block text-xs text-slate-400 mb-1.5">자녀 계획 / 현황</label>
               <div class="grid grid-cols-4 gap-2">
@@ -193,6 +200,7 @@
               </div>
             </div>
 
+            <!-- Parental Leave -->
             <div id="leave-option-box">
               <label class="block text-xs text-slate-400 mb-1.5">
                 출산 시 육아휴직 계획 <span class="text-rose-400 font-semibold">(소득 급감 & 주담대 원리금 위험)</span>
@@ -200,7 +208,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button type="button" onclick="setLeaveType('none')" id="leave-btn-none" class="leave-btn p-2 rounded-lg border border-slate-800 bg-slate-900 text-left">
                   <div class="text-xs font-bold text-slate-300">휴직 미사용</div>
-                  <div class="text-[10px] text-slate-400 mt-0.5">양가 조모 양육/입주 베이비시터</div>
+                  <div class="text-[10px] text-slate-400 mt-0.5">양가 조모 양육/입주 시터</div>
                 </button>
                 <button type="button" onclick="setLeaveType('one')" id="leave-btn-one" class="leave-btn p-2 rounded-lg border border-indigo-600 bg-indigo-950/50 text-left">
                   <div class="text-xs font-bold text-indigo-300">한 명만 1년 사용</div>
@@ -215,7 +223,7 @@
           </div>
         </div>
 
-        <!-- 4. Expanded Transit & Workplace Hubs (8 Options) -->
+        <!-- 4. Expanded Transit & Workplace Hubs -->
         <div class="mb-5">
           <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
             직주근접 권역 & 통근 노선망 (매물 후보지 및 시세 결정)
@@ -306,7 +314,7 @@
         <!-- Start CTA -->
         <div class="pt-4">
           <button type="button" onclick="startGame()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.99] text-white font-bold rounded-xl shadow-lg shadow-indigo-600/30 transition text-sm flex items-center justify-center gap-2">
-            <span>첫 집 마련 10년 시뮬레이션 개시</span>
+            <span>22개 악재 서바이벌 시뮬레이션 개시</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
@@ -331,22 +339,22 @@
       <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-2xl">
         <div class="flex justify-between items-center text-xs mb-1.5">
           <div class="flex items-center gap-1.5">
-            <span id="game-year-pill" class="bg-indigo-600 text-white font-mono font-bold px-2 py-0.5 rounded text-[11px]">1년차</span>
-            <span id="game-phase-name" class="font-bold text-slate-200 text-xs">탐색 & 자금조달</span>
+            <span id="game-year-pill" class="bg-indigo-600 text-white font-mono font-bold px-2 py-0.5 rounded text-[11px]">악재 1/22</span>
+            <span id="game-phase-name" class="font-bold text-slate-200 text-xs">매물 탐색 & 자금 조달</span>
           </div>
           <div class="text-[11px] text-slate-400 font-mono">
             인생 시계: <span id="game-age-val" class="text-indigo-400 font-bold">32</span>세 | 가구: <span id="game-family-val" class="text-emerald-400 font-bold">미혼</span>
           </div>
         </div>
         <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-          <div id="timeline-progress" class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 10%"></div>
+          <div id="timeline-progress" class="bg-gradient-to-r from-indigo-500 via-amber-500 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 5%"></div>
         </div>
       </div>
 
       <!-- Realtime Asset Snapshot Card -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
         <div class="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl">
-          <div class="text-[10px] text-slate-400">보유 부동산 가치</div>
+          <div class="text-[10px] text-slate-400">보유 부동산 시세</div>
           <div id="stat-house-val" class="text-sm font-bold text-white font-mono mt-0.5">0억</div>
         </div>
         <div class="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl">
@@ -354,11 +362,11 @@
           <div id="stat-debt-val" class="text-sm font-bold text-rose-400 font-mono mt-0.5">0억</div>
         </div>
         <div class="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl">
-          <div class="text-[10px] text-slate-400">가용 유동 현금</div>
+          <div class="text-[10px] text-slate-400">가용 비상금 통장</div>
           <div id="stat-cash-val" class="text-sm font-bold text-amber-400 font-mono mt-0.5">0만</div>
         </div>
         <div class="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl">
-          <div class="text-[10px] text-slate-400">가구 월 가처분 잔액</div>
+          <div class="text-[10px] text-slate-400">월 가처분 현금흐름</div>
           <div id="stat-monthly-val" class="text-sm font-bold text-emerald-400 font-mono mt-0.5">+180만</div>
         </div>
       </div>
@@ -397,7 +405,7 @@
               <span>선택 다시 하기</span>
             </button>
             <button type="button" onclick="proceedToNextStep()" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.99] rounded-xl text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-1.5">
-              <span>다음 연차로 진행</span>
+              <span>다음 악재 극복하기</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
@@ -409,8 +417,10 @@
     <section id="screen-ending" class="space-y-6 hidden">
       <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl text-center">
         <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-3xl mb-3">🏆</div>
-        <h2 class="text-xl md:text-2xl font-bold text-white">10년 보유 완주! 첫 집 생존 성공</h2>
-        <p class="text-xs md:text-sm text-slate-400 mt-1">육아휴직 소득 급감, 대출 금리 폭등, 누수 분쟁을 이겨내고 온전한 1세대 1주택 자산을 지켜냈습니다.</p>
+        <h2 class="text-xl md:text-2xl font-bold text-white">22개 부동산 악재 전원 돌파! 첫 집 생존 성공</h2>
+        <p class="text-xs md:text-sm text-slate-400 mt-1">
+          가계약금 배액배상 거부, 가압류, 방공제 대출절벽, 인테리어 사기, 누수 소송, 특별장충금, 거래절벽을 뚫고 1세대 1주택 비과세 자산을 지켜냈습니다.
+        </p>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6 text-left">
           <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
@@ -419,14 +429,14 @@
           </div>
           <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
             <div class="text-[10px] text-slate-400">갚아낸 원금</div>
-            <div id="end-repaid" class="text-lg font-bold text-indigo-400 font-mono">2.4억</div>
+            <div id="end-repaid" class="text-lg font-bold text-indigo-400 font-mono">2.8억</div>
           </div>
           <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
             <div class="text-[10px] text-slate-400">방어 성공 악재</div>
-            <div id="end-defense-count" class="text-lg font-bold text-amber-400 font-mono">8건</div>
+            <div id="end-defense-count" class="text-lg font-bold text-amber-400 font-mono">18 / 22개</div>
           </div>
           <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-            <div class="text-[10px] text-slate-400">최종 멘탈 잔여</div>
+            <div class="text-[10px] text-slate-400">최종 잔여 멘탈</div>
             <div id="end-mental" class="text-lg font-bold text-rose-400 font-mono">85%</div>
           </div>
         </div>
@@ -443,7 +453,7 @@
           <span id="copy-toast" class="text-[11px] text-emerald-400 mt-1.5 block opacity-0 transition-opacity">클립보드에 복사되었습니다!</span>
         </div>
 
-        <button type="button" onclick="location.reload()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs transition">다른 가족 구성으로 다시 플레이하기</button>
+        <button type="button" onclick="location.reload()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs transition">다른 조건으로 다시 도전하기</button>
       </div>
     </section>
 
@@ -560,16 +570,88 @@
 
     const LEGAL_KNOWLEDGE = {
       dsr: {
-        title: "스트레스 DSR 2단계 및 소득증빙 가이드라인",
-        statute: "은행업감독업무시행세칙 제35조: 부부합산 소득 증빙 시 배우자 원천징수영수증 및 소득금액증명원을 필히 제출하며 가산금리(수도권 1.2%p)를 의무 합산한다.",
-        precedent: "맞벌이 합산 DSR 적용 후 일방의 육아휴직 시 원리금 감당 비율이 소득의 60%를 초과해 가계 부실 위험 발생 가능.",
-        script: "'지점장님, 배우자 소득합산으로 대출을 실행하되 차후 육아휴직을 대비해 40년 만기 원리금균등으로 월 부담을 분산하겠습니다.'"
+        title: "은행업감독업무시행세칙 - 스트레스 DSR 2단계",
+        statute: "제35조: 차주의 대출 한도 산정 시 과거 금리변동폭을 반영한 가산금리(수도권 1.2%p)를 의무 가산하여 DSR 40% 한도를 제한한다.",
+        precedent: "소득 대비 연간 원리금상환액에 가산금리가 붙으면 주담대 한도가 8~12% 직접 삭감됨.",
+        script: "'지점장님, 만기를 40년으로 늘리고 신용대출을 선상환하여 DSR 여력을 확보하겠습니다.'"
       },
       precontract: {
         title: "민법 제565조 (해약금) 및 대법원 2014다231378",
-        statute: "매매계약 당시 교부된 계약금은 당사자 간 특별 약정이 없는 한 해약금으로 추정된다.",
-        precedent: "대법원 2014다231378: 가계약금만 일부 건넨 상황이라도 해약금 기준은 실제 입금액이 아니라 약정 계약금 전액이다.",
-        script: "'매도인님, 대법원 2014다231378 판례에 따라 약정 계약금 총액을 기준으로 배액배상하셔야 계약이 해제됩니다.'"
+        statute: "계약금의 교부는 해약금으로 추정되며, 일방이 착수하기 전 교부자는 포기하고 수령자는 배액을 상환하여 해제할 수 있다.",
+        precedent: "대법원 2014다231378: 가계약금만 일부 건넸더라도 해약금의 기준은 실제 입금액이 아니라 '약정 계약금 전액'이다.",
+        script: "'매도인님, 대법원 판례에 따라 입금된 가계약금이 아니라 약정 계약금 10% 전액을 기준으로 배액배상하셔야 합니다.'"
+      },
+      brokerage: {
+        title: "공인중개사법 제32조 및 대법원 2000다48265 전원합의체",
+        statute: "시·도 조례로 정한 법정 상한 요율을 초과하여 중개보수를 받는 행위는 전면 금지된다.",
+        precedent: "법정 한도를 초과하는 중개수수료 약정은 초과분 전액 무효이며 부당이득 반환 청구 대상이다.",
+        script: "'소장님, 6억~9억 구간의 상한 요율은 0.4%입니다. 초과 요구는 공인중개사법 위반으로 무효이므로 0.4%에 정산하겠습니다.'"
+      },
+      loan_special: {
+        title: "민법 제147조 (조건부 법률행위) - 대출 미발생 특약",
+        statute: "해제조건 있는 법률행위는 조건이 성취한 때로부터 그 효력을 잃는다.",
+        precedent: "'금융기관의 주담대 승인 불가 시 본 계약은 위약금 없이 무효로 하고 계약금 전액을 즉시 반환한다'는 유효한 해제조건 특약임.",
+        script: "'중개사님, 대출 거절 특약을 계약서 특약사항 제1조에 반드시 자필 명기해 주십시오.'"
+      },
+      deposit_return: {
+        title: "주택임대차보호법 제3조의3 (임차권등기명령)",
+        statute: "임대차가 끝난 후 보증금을 반환받지 못한 임차인은 임차주택의 소재지를 관할하는 법원에 임차권등기명령을 신청할 수 있다.",
+        precedent: "임차권등기가 경료되면 이사를 가더라도 대항력과 우선변제권이 유지되며, 집주인에게 지연이자(연 12%)를 청구할 수 있음.",
+        script: "'집주인님, 잔금일까지 보증금 미반환 시 즉시 임차권등기명령 접수 및 소송 촉진 특례법상 연 12% 지연이자를 청구하겠습니다.'"
+      },
+      trust_deed: {
+        title: "신탁법 제22조 및 부동산등기법 제81조 (신탁등기)",
+        statute: "신탁재산에 대하여는 강제집행, 가압류, 가처분 또는 경매를 할 수 없다. 대내외적 소유권은 수탁자(신탁회사)에게 있다.",
+        precedent: "위탁자(시행사/개인)는 수탁자의 동의 없이 매매계약을 체결할 수 없으며, 수탁자 동의 없는 계약은 무권대리로 무효임.",
+        script: "'등기부 갑구에 신탁등기가 되어 있습니다. 신탁원부를 열람하고 신탁회사의 정식 매매동의서 원본을 확인하기 전엔 계약금을 넣지 않겠습니다.'"
+      },
+      gift_tax: {
+        title: "상속세 및 증여세법 제41조의4 (금전 무상대출에 따른 이익의 증여)",
+        statute: "특수관계인 간 차용 시 적정 이자율(연 4.6%) 미만의 이자를 지급하거나 무상으로 빌린 경우 이익 상당액을 증여로 본다. (단, 차용금 2억 1,700만원 이하는 비과세)",
+        precedent: "차용증 작성, 공증, 통장 계좌이체 내역 및 실제 원리금 변제 내역이 증빙되지 않으면 전액 편법 증여로 추징당함.",
+        script: "'세무사님, 부모님께 빌리는 2억원은 무이자 차용증을 작성하고 인감증명서를 첨부하여 계좌 이체로 명확한 차용 증빙을 남기겠습니다.'"
+      },
+      room_deduction: {
+        title: "주택임대차보호법 시행령 제10조 (소액임차인의 최우선변제금 방공제)",
+        statute: "소액임차인의 보증금 중 일정액(서울 5,500만원, 경기 과밀 4,800만원)은 담보물권자보다 우선하여 변제받을 권리가 있다.",
+        precedent: "은행은 방 개수마다 최우선변제금을 대출 가능액에서 차감(방공제)하므로, MCG/MCI 보증보험에 가입해야 방공제 없이 전액 대출이 실행됨.",
+        script: "'은행원님, 방공제로 대출금이 4,800만원 깎이지 않도록 MCI/MCG 모기지 보증보험을 필히 연계해 주십시오.'"
+      },
+      provisional_seizure: {
+        title: "민법 제576조 (저당권·전세권 행사에 따른 매수인의 해제권)",
+        statute: "매매의 목적이 된 부동산에 설정된 저당권 또는 전세권의 행사로 인하여 매수인이 그 소유권을 취득할 수 없거나 취득한 소유권을 잃은 때에는 매수인은 계약을 해제할 수 있다.",
+        precedent: "가압류, 근저당 등 제한물권이 설정된 경우 잔금 지급과 동시이행으로 말소 서류를 확인하고 잔금을 집행해야 함.",
+        script: "'매도인님, 가압류 말소 접수증과 완제영수증을 은행 법무사가 확인할 때까지 가압류 해당액 지급을 유보하겠습니다.'"
+      },
+      illegal_building: {
+        title: "건축법 제79조 및 제80조 (위반건축물 이행강제금)",
+        statute: "허가권자는 건축물대장에 위반건축물로 표기하고 시정명령을 이행하지 아니한 건축주 등에 대하여 이행강제금을 부과한다.",
+        precedent: "베란다 무단 섀시 확장이나 옥탑방 증축은 철거할 때까지 매년 시가표준액의 10%에 달하는 이행강제금이 영구 부과됨.",
+        script: "'구청 주택과에 문의한 결과 불법 섀시 베란다입니다. 매도인 비용으로 원상복구하거나 철거비용을 매매대금에서 삭감해 주십시오.'"
+      },
+      judicial_scam: {
+        title: "대한법무사회 회칙 제46조 및 취득세 대행 보수기준",
+        statute: "법무사는 소정의 인가 보수기준을 초과하여 보수를 받아서는 아니 된다.",
+        precedent: "은행 지정 법무사가 원인증서 작성료, 취득세 대행료, 채권할인료 과다 청구로 바가지를 씌울 경우 영수증을 요구하고 플랫폼 견적으로 교체 가능.",
+        script: "'법무사님, 채권할인 영수증과 보수기준표를 첨부해 주십시오. 과다 청구 항목은 법무사회 보수기준에 맞춰 전액 삭감하겠습니다.'"
+      },
+      interior_fraud: {
+        title: "건설산업기본법 제9조 (건설업의 등록) - 실내건축공사업",
+        statute: "공사예정금액이 1,500만원 이상인 실내건축공사는 국토교통부에 등록된 건설업자만이 도급받을 수 있다.",
+        precedent: "무면허 인테리어 업자와의 계약은 공사 중단 및 하자 시 하자보수보증보험(SGI) 가입이 불가능해 피해 구제가 극히 어려움.",
+        script: "'실내건축공사업 면허 등록증과 서울보증보험 계약이행보증증권 발행을 필수로 계약서에 명시하겠습니다.'"
+      },
+      latent_defect: {
+        title: "민법 제580조(매도인의 하자담보책임) 및 제582조",
+        statute: "매매 목적물에 하자가 있을 때 매수인은 안 날로부터 6개월 내에 손해배상을 청구할 수 있다.",
+        precedent: "대법원 99다63388: 현 상태대로 매매 특약이 있어도 매수인이 계약 당시 알 수 없었던 노후 배관 누수는 매도인이 전액 배상해야 함.",
+        script: "'매도인님, 잔금 전부터 배관에 잠재되어 있던 하자는 민법 제580조에 따라 매도인 전액 배상 책임입니다. 견적서 송부합니다.'"
+      },
+      insurance_leak: {
+        title: "상법 제680조(손해방지의무) 및 일상생활배상책임",
+        statute: "피보험자는 손해 경감을 위해 노력해야 하며 필요한 유익 비용은 보험자가 부담한다.",
+        precedent: "대법원 2020다277025: 아랫집 누수를 막기 위한 가해 세대 내부 배관 굴착·탐지비도 손해방지비용으로 보험사가 지급해야 함.",
+        script: "'보험사 담당자님, 대법원 판례에 의거하여 아랫집 피해 복구비 및 저희 집 누수탐지 굴착비 전액을 청구합니다.'"
       },
       leave_crisis: {
         title: "남녀고용평등법 제19조 및 주담대 원리금 상환 유예",
@@ -577,34 +659,22 @@
         precedent: "금융감독원 취약차주 지원 지침: 육아휴직 또는 실직으로 소득이 급감한 1주택 실거주 차주는 최대 1~3년 원금 상환 유예 신청이 가능함.",
         script: "'은행 대출계 담당자님, 육아휴직으로 소득이 일시 급감했습니다. 취약차주 원금 상환유예 제도를 신청하여 이자만 우선 납입하겠습니다.'"
       },
-      brokerage: {
-        title: "공인중개사법 제32조 및 대법원 2000다48265 전원합의체",
-        statute: "시·도 조례로 정한 법정 상한 요율을 초과하여 중개보수를 받는 행위는 전면 금지된다.",
-        precedent: "법정 한도를 초과하는 중개수수료 약정은 초과분 전액 무효이며 부당이득 반환 청구 대상이다.",
-        script: "'소장님, 법정 상한 요율은 0.4%입니다. 초과 요구는 공인중개사법 제33조 위반이므로 0.4%에 정산하겠습니다.'"
-      },
-      latent_defect: {
-        title: "민법 제580조(하자담보책임) 및 제582조",
-        statute: "매매 목적물에 하자가 있을 때 매수인은 안 날로부터 6개월 내에 손해배상을 청구할 수 있다.",
-        precedent: "대법원 99다63388: 현 상태대로 매매 특약이 있어도 계약 당시 알 수 없었던 노후 배관 누수는 매도인이 배상해야 함.",
-        script: "'매도인님, 잔금 전부터 배관에 잠재되어 있던 하자는 민법 제580조에 따라 매도인 전액 배상 책임입니다. 견적서 송부합니다.'"
-      },
-      insurance_leak: {
-        title: "상법 제680조(손해방지의무) 및 일상생활배상책임",
-        statute: "피보험자는 손해 경감을 위해 노력해야 하며 필요한 유익 비용은 보험자가 부담한다.",
-        precedent: "대법원 2020다277025: 아랫집 누수를 막기 위한 가해 세대 내부 배관 굴착·탐지비도 손해방지비용으로 보험사가 지급해야 함.",
-        script: "'보험사 담당자님, 대법원 2020다277025 판례에 의거하여 아랫집 피해 복구비 및 저희 집 누수탐지 굴착비 전액을 청구합니다.'"
-      },
       noise: {
         title: "공동주택관리법 제20조 (층간소음 방지)",
         statute: "입주자등은 층간소음 피해 방지를 위해 노력해야 하며 이웃사이센터에 중재를 신청할 수 있다.",
         precedent: "사적 보복소음은 경범죄 및 민사상 불법행위가 되므로 환경부 공식 측정 중재를 통해 해결해야 함.",
         script: "'관리사무소에 정식 접수하고 환경부 층간소음 이웃사이센터에 3자 현장 측정을 신청하겠습니다.'"
       },
+      special_reserve: {
+        title: "공동주택관리법 제30조 (장기수선충당금의 적립)",
+        statute: "주요 시설 교체에 필요한 장기수선충당금은 장기수선계획에 따라 소유자로부터 징수하여 적립한다.",
+        precedent: "입주자 과반수 동의 없는 일방적 특별수선충당금 징수는 무효이며, 지자체 노후 승강기 교체 보조금(최대 40%) 지원 조례를 적용해야 함.",
+        script: "'입대의 회장님, 지자체 노후 승강기 교체 보조금 지원사업 공모를 통해 공사비의 40%를 지원받는 절차를 먼저 밟아주십시오.'"
+      },
       tax_exemption: {
         title: "소득세법 제89조 (1세대 1주택 비과세)",
-        statute: "1세대가 1주택을 2년 이상 보유한 경우 양도가액 12억원까지 비과세된다.",
-        precedent: "10년 이상 장기보유 및 거주 시 장기보유특별공제 최대 80%가 적용되어 세부담이 극도로 미미해짐.",
+        statute: "1세대가 1주택을 2년 이상 보유(취득 당시 조정대상지역인 경우 거주 2년)한 경우 양도가액 12억원까지 비과세된다.",
+        precedent: "10년 이상 장기보유 및 실거주 시 장기보유특별공제 최대 80%가 적용되어 양도차익이 수억 원이어도 세부담이 거의 전무함.",
         script: "'세무사님, 실거주 10년을 채운 1세대 1주택자이므로 12억 비과세 및 장특공 80%를 전액 적용해 신고합니다.'"
       }
     };
@@ -731,285 +801,6 @@
       });
     }
 
-    function buildDynamicEvents() {
-      const hasKids = gameState.childCount > 0;
-      const leave = gameState.leaveType;
-
-      return [
-        {
-          year: 1,
-          phase: "준비·탐색",
-          title: "직주근접 호가 급등 & 초기 종잣돈 압박",
-          icon: "📈",
-          lawKey: "dsr",
-          desc: `${HUBS[gameState.workHub].name} 권역 아파트 호가가 매달 가파르게 상승합니다. 수중에 있는 종잣돈 대비 예산 부족을 느끼며 조급한 영끌의 유혹이 찾아옵니다.`,
-          choices: [
-            {
-              text: "원천징수와 부부합산 DSR 한도를 엄격히 계산해 예산선 내 1~2정거장 이격 단지로 눈높이를 맞춘다.",
-              mental: -5, cash: 0, debt: 0,
-              feedback: "무리한 2금융권 영끌을 피하고 냉정하게 자금 계획을 수립했습니다."
-            },
-            {
-              text: "초과 호가를 맞추기 위해 카드론과 2금융권 신용대출 5,000만원을 미리 끌어온다.",
-              mental: -30, cash: -1200, debt: +5000,
-              feedback: "신용대출로 인해 본 주담대 DSR 한도가 삭감되는 이중고를 겪게 됩니다."
-            },
-            {
-              text: "매수를 완전 포기하고 일단 위험자산 코인/주식으로 시드를 2배 튀기려 시도한다.",
-              mental: -45, cash: -3000, debt: 0,
-              feedback: "시장 변동성에 시드가 깎여 첫 집 마련 계획이 무기한 연기될 뻔했습니다."
-            }
-          ]
-        },
-        {
-          year: 2,
-          phase: "대출·심사",
-          title: "가계약금 배액배상 거부 & 호가 인상 횡포",
-          icon: "⚖️",
-          lawKey: "precontract",
-          desc: "마음에 드는 집을 발견해 가계약금 500만원을 입금했으나, 집주인이 '다른 매수자가 2천만원 더 주겠다고 했다'며 500만원만 돌려주고 파기하려 합니다.",
-          choices: [
-            {
-              text: "대법원 2014다231378 판례를 근거로 약정 계약금 총액(매매가의 10%) 기준 위약금 내용증명을 즉각 송달한다.",
-              mental: +10, cash: +2000, debt: 0,
-              feedback: "판례의 서슬 퍼런 위력을 확인한 매도인이 백기를 들고 원래 계약 조건대로 진행하기로 합의했습니다!"
-            },
-            {
-              text: "법적 분쟁이 번거로워 돌려준 500만원만 받고 매물을 포기한다.",
-              mental: -25, cash: 0, debt: 0,
-              feedback: "아쉬움 속에 집을 놓치고, 해당 아파트는 곧바로 더 비싼 가격에 팔렸습니다."
-            },
-            {
-              text: "매도인의 집과 중개업소에 찾아가 고성을 지르고 물리력을 행사한다.",
-              mental: -40, cash: -300, debt: 0,
-              feedback: "업무방해 혐의로 입건될 뻔하며 경찰서 조사와 합의금만 날렸습니다."
-            }
-          ]
-        },
-        {
-          year: 3,
-          phase: "계약·잔금",
-          title: "잔금일 등기부 가압류 발견 & 복비 요율 실랑이",
-          icon: "📑",
-          lawKey: "brokerage",
-          desc: "잔금 당일 등기부에 매도인의 사업상 가압류 4,000만원이 기습 설정되었습니다. 게다가 공인중개사는 법정 상한 요율(0.4%)을 초과하는 0.8% 수수료를 당연하다는 듯 요구합니다.",
-          choices: [
-            {
-              text: "가압류 말소 확인 전까지 잔금 4천 지급을 거절(동시이행항변)하고, 복비는 법정 상한 0.4%로 확정 이체한다.",
-              mental: +5, cash: +400, debt: 0,
-              feedback: "철저한 법적 방어로 가압류를 전액 말소시키고 과다 복비 청구도 완벽 차단했습니다!"
-            },
-            {
-              text: "중개사가 '잔금 넘어가면 다 알아서 풀어준다'는 말만 믿고 전액 송금한다.",
-              mental: -35, cash: -900, debt: 0,
-              feedback: "가압류 말소가 수개월 지체되어 내 집에 경매 개시가 될 뻔한 공포를 겪었습니다."
-            },
-            {
-              text: "홧김에 계약 자체를 일방 파기하겠다고 소리친다.",
-              mental: -50, cash: -4000, debt: 0,
-              feedback: "정당한 절차 없는 계약 파기로 계약금 몰수 소송에 휘말렸습니다."
-            }
-          ]
-        },
-        {
-          year: 4,
-          phase: "출산·소득절벽",
-          title: hasKids
-            ? (leave === 'both' ? "부부 동시 육아휴직 돌입 & 월 원리금 상환 대위기!" : "육아휴직 소득 급감 & 주담대 원리금 압박!")
-            : "금리 인상기 도래 & 1인 가구 생활비 긴축",
-          icon: hasKids ? "🍼" : "📉",
-          lawKey: "leave_crisis",
-          desc: hasKids
-            ? `자녀 양육을 위해 ${leave === 'both' ? '부부가 순차/동시 육아휴직' : '육아휴직'}에 들어갔습니다. 휴직 급여 상한선(월 160만원)으로 인해 가구 실소득이 반토막 났는데, 매달 주담대 원리금 220만원이 꼬박꼬박 빠져나가며 숨이 턱턱 막힙니다.`
-            : `고금리 기조가 지속되며 월 원리금 상환액이 늘어났습니다. 비상금 지출을 타이트하게 조이지 않으면 유동성이 위험해집니다.`,
-          choices: hasKids ? [
-            {
-              text: "정부 지원 취약차주 원금상환유예(최대 1~3년 이자만 납부)를 은행에 정식 신청하고 지출을 방어한다.",
-              mental: +10, cash: -200, debt: 0,
-              feedback: "원금 유예 승인을 받아 월 상환 부담을 70만원 선으로 낮추고 고비를 무사히 넘겼습니다!"
-            },
-            {
-              text: "부족한 생활비를 메우기 위해 연 15% 카드론과 리볼빙을 돌려막는다.",
-              mental: -45, cash: -1200, debt: +2000,
-              feedback: "고금리 대출 이표가 눈덩이처럼 불어나 가계 경제가 파탄 직전에 몰립니다."
-            },
-            {
-              text: "원리금을 감당 못해 첫 집을 헐값에 급매로 던지고 전세로 돌아가려 한다.",
-              mental: -50, cash: -4000, debt: 0,
-              feedback: "부동산 하락기 투매로 자산과 멘탈에 치명적인 내상을 입었습니다."
-            }
-          ] : [
-            {
-              text: "불필요한 지출을 삭감하고 파킹통장 비상금을 가동해 원리금을 버텨낸다.",
-              mental: -5, cash: -200, debt: 0,
-              feedback: "안정적인 현금흐름으로 금리 파도를 의연하게 버텼습니다."
-            },
-            {
-              text: "생활고를 이유로 주담대 이자를 2달 연속 연체한다.",
-              mental: -35, cash: -500, debt: 0,
-              feedback: "신용점수 급락과 은행의 기한이익상실(EOT) 경고장을 받았습니다."
-            },
-            {
-              text: "주말 배달 투잡 등 극한의 N잡으로 이자를 메운다.",
-              mental: -25, cash: +400, debt: 0,
-              feedback: "몸은 부서질 듯 힘들었지만 가계 현금흐름을 기어코 지켜냈습니다."
-            }
-          ]
-        },
-        {
-          year: 5,
-          phase: "입주·하자",
-          title: "장마철 안방 천장 누수 & 매도인의 잠적",
-          icon: "💧",
-          lawKey: "latent_defect",
-          desc: "여름 폭우에 안방 천장에서 물이 새며 석고보드가 주저앉았습니다. 매도인에게 전화하자 '계약서에 현 상태대로 매매한다고 적었으니 1원도 못 준다'며 차단합니다.",
-          choices: [
-            {
-              text: "민법 제580조 및 582조(안 날부터 6개월) 근거 전문 진단서 첨부 내용증명 및 지급명령을 신청한다.",
-              mental: +5, cash: 0, debt: 0,
-              feedback: "대법원 99다63388 판례에 따라 매도인으로부터 수리비 450만원 전액을 회수했습니다!"
-            },
-            {
-              text: "귀찮아서 내 돈 450만원을 들여 사설 업자를 불러 고친다.",
-              mental: -20, cash: -450, debt: 0,
-              feedback: "매도인의 법적 하자를 고스란히 혼자 독박 썼습니다."
-            },
-            {
-              text: "양동이를 받쳐두고 누수를 1년 넘게 방치한다.",
-              mental: -35, cash: 0, debt: 0,
-              feedback: "집안 전체에 곰팡이가 번식해 가족 건강과 멘탈이 심각하게 손상되었습니다."
-            }
-          ]
-        },
-        {
-          year: 6,
-          phase: "재난·배상",
-          title: "영하 18도 한파 온수배관 파열 & 아랫집 침수",
-          icon: "❄️",
-          lawKey: "insurance_leak",
-          desc: "베란다 보일러 온수배관이 동파되어 터지며 아래층 명품 가구와 가전제품이 침수되었습니다. 아랫집에서 1,500만원 손해배상을 청구했습니다.",
-          choices: [
-            {
-              text: "사전 가입한 '일상생활배상책임특약(일배책)'과 손해방지비용 청구로 보험 접수한다.",
-              mental: +10, cash: -50, debt: 0,
-              insuranceCheck: true,
-              feedback: "보험 방패 가동! 자부담금 50만원만으로 1,500만원 배상 책임을 완벽 방어했습니다."
-            },
-            {
-              text: "아랫집에 '천재지변이니 배상할 수 없다'고 막무가내로 버틴다.",
-              mental: -45, cash: -1800, debt: 0,
-              feedback: "민사소송 패소로 배상금 1,500만원에 상대 변호사비와 지연이자까지 수백만원을 물어줬습니다."
-            },
-            {
-              text: "카드론 고금리 대출을 받아 전액 사비로 현금 합의한다.",
-              mental: -30, cash: -1500, debt: +500,
-              feedback: "통장 잔고가 완전히 바닥나며 가계 경제가 휘청였습니다."
-            }
-          ]
-        },
-        {
-          year: 7,
-          phase: "이웃·분쟁",
-          title: "윗집의 밤샘 스크린골프 층간소음 분쟁",
-          icon: "🔊",
-          lawKey: "noise",
-          desc: "윗집 주민이 실내 골프 타격망을 설치하고 밤 11시마다 골프 연습을 합니다. 쿵쿵거리는 타격음과 진동에 매일 밤 뜬눈으로 밤을 지샙니다.",
-          choices: [
-            {
-              text: "환경부 '층간소음 이웃사이센터'에 소음 측정 중재를 정식 접수하고 관리사무소 경고를 연계한다.",
-              mental: +5, cash: 0, debt: 0,
-              feedback: "공식 데시벨 측정 결과 규제치 초과가 증명되어 윗집이 골프망을 철거했습니다."
-            },
-            {
-              text: "천장에 우퍼 스피커를 달고 록 음악을 틀어 보복 소음을 낸다.",
-              mental: -30, cash: -100, debt: 0,
-              feedback: "경범죄처벌법 및 민사 인격권 침해 역고소를 당해 법원 출석 통지서를 받았습니다."
-            },
-            {
-              text: "야구방망이를 들고 윗집 현관문을 쾅쾅 두드리며 위협한다.",
-              mental: -45, cash: -300, debt: 0,
-              feedback: "특수협박 혐의로 입건되어 형사 합의금을 물어주었습니다."
-            }
-          ]
-        },
-        {
-          year: 8,
-          phase: "관리·수선",
-          title: "승강기 교체 특별장기수선충당금 800만원 부과",
-          icon: "🛗",
-          lawKey: "brokerage",
-          desc: "단지 준공 25년 차 엘리베이터 정밀안전진단 불합격으로 입주자대표회의에서 세대당 800만원을 일시 부과하겠다고 공고했습니다.",
-          choices: [
-            {
-              text: "공동주택관리법 제30조 및 지자체 '노후 승강기 교체 보조금(40%) 지원사업' 공모 신청을 입대의에 공식 상정한다.",
-              mental: +10, cash: -250, debt: 0,
-              feedback: "시청 보조금 대상 단지에 선정되어 세대 분담금을 800만원에서 250만원으로 낮췄습니다!"
-            },
-            {
-              text: "따지기 귀찮아서 청구된 800만원을 그대로 전액 납부한다.",
-              mental: -20, cash: -800, debt: 0,
-              feedback: "지자체 보조금 혜택을 놓치고 소중한 목돈 800만원이 통장에서 빠져나갔습니다."
-            },
-            {
-              text: "승강기 없이 계단으로 다니면 된다며 무조건 교체 공사를 반대한다.",
-              mental: -35, cash: 0, debt: 0,
-              feedback: "운행 정지로 인해 매일 유모차와 짐을 들고 계단을 오르내리는 고역을 치렀습니다."
-            }
-          ]
-        },
-        {
-          year: 9,
-          phase: "시장·공급",
-          title: "인근 택지 1.2만 가구 신축 입주 폭탄",
-          icon: "🏗️",
-          lawKey: "tax_exemption",
-          desc: "인접 지역에 대규모 신축 아파트 단지가 입주를 시작하며 매매가와 전세가가 일시적으로 15% 급락하고 매수 심리가 꽁꽁 얼어붙었습니다.",
-          choices: [
-            {
-              text: "입주장 충격은 1~2년 내 해소된다는 점을 직시하고, 직주근접 실거주로 10년 비과세를 채우며 버틴다.",
-              mental: +10, cash: 0, debt: -2000,
-              feedback: "공포에 흔들리지 않고 버텨내자, 신축 인프라가 자리잡으며 집값이 전고점을 뚫고 상승했습니다!"
-            },
-            {
-              text: "공포를 이기지 못하고 가장 바닥 시세에 마이너스 프리미엄 급매물로 던진다.",
-              mental: -50, cash: -6000, debt: 0,
-              feedback: "바닥에서 손절한 뒤 불과 8개월 만에 집값이 반등해 극심한 상실감을 맛보았습니다."
-            },
-            {
-              text: "집값 떨어진 화풀이로 입대의와 함께 인터넷 호가 담합 시위에 동참한다.",
-              mental: -25, cash: 0, debt: 0,
-              feedback: "공인중개사법상 부동산 거래질서 교란행위로 관할 지자체 경고를 받았습니다."
-            }
-          ]
-        },
-        {
-          year: 10,
-          phase: "출구·매도",
-          title: "10년 보유 완주 & 거래 절벽 속 1주택 비과세 매도",
-          icon: "🏆",
-          lawKey: "tax_exemption",
-          desc: "실거주 10년이 채워졌습니다. 상급지 갈아타기를 위해 매도를 추진하지만 부동산 비수기라 매수 문의가 뜸합니다.",
-          choices: [
-            {
-              text: "인근 8개 중개업소 복수 등록, 4개월 여유 잔금일 제시 및 1세대 1주택 12억 비과세 혜택을 온전히 확정짓는다.",
-              mental: +20, cash: +85000, debt: 0,
-              feedback: "정상 시세에 깔끔하게 매도 완료! 양도세 0원의 비과세 혜택과 두둑한 갈아타기 종잣돈을 거머쥐었습니다!"
-            },
-            {
-              text: "동네 중개업소 한 곳에만 '전속'으로 맡기고 손님이 오기만을 마냥 기다린다.",
-              mental: -15, cash: +65000, debt: 0,
-              feedback: "매도가 반년 넘게 지연되어 시세보다 5천만원 깎인 가격에 처분해야 했습니다."
-            },
-            {
-              text: "세금 아낀다고 매수인과 다운계약서(거짓 거래가 작성)를 작성하기로 합의한다.",
-              mental: -50, cash: -3000, debt: 0,
-              feedback: "국세청 자금조달계획서 세무조사로 비과세 박탈 및 과태료 폭탄을 맞았습니다."
-            }
-          ]
-        }
-      ];
-    }
-
     let dynamicEvents = [];
 
     function startGame() {
@@ -1084,26 +875,26 @@
       document.getElementById('choice-result-panel').classList.add('hidden');
 
       const ev = dynamicEvents[stepIndex];
-      const currentYear = ev.year;
-      const effectiveAge = gameState.currentAge + (currentYear - 1);
+      const progressPercent = Math.round(((stepIndex + 1) / dynamicEvents.length) * 100);
+      const effectiveAge = gameState.currentAge + Math.floor(stepIndex * (10 / dynamicEvents.length));
 
       const undoText = document.getElementById('btn-undo-text');
       if (stepIndex === 0) {
         undoText.innerText = "설정 화면으로";
       } else {
-        undoText.innerText = `${stepIndex}년차로 되돌리기`;
+        undoText.innerText = `악재 ${stepIndex}번으로 되돌리기`;
       }
 
-      document.getElementById('game-year-pill').innerText = `${currentYear}년차`;
+      document.getElementById('game-year-pill').innerText = `악재 ${ev.num}/${dynamicEvents.length}`;
       document.getElementById('game-phase-name').innerText = ev.phase;
-      document.getElementById('timeline-progress').style.width = `${currentYear * 10}%`;
+      document.getElementById('timeline-progress').style.width = `${progressPercent}%`;
       document.getElementById('game-age-val').innerText = effectiveAge;
 
       const famStr = gameState.maritalStatus === 'single' ? '미혼' : `기혼 (자녀 ${gameState.childCount}명)`;
       document.getElementById('game-family-val').innerText = famStr;
 
       document.getElementById('event-icon').innerText = ev.icon;
-      document.getElementById('event-title').innerText = `${currentYear}년차 : ${ev.title}`;
+      document.getElementById('event-title').innerText = `${ev.num}. ${ev.title}`;
       document.getElementById('event-desc').innerText = ev.desc;
 
       const lawInfo = LEGAL_KNOWLEDGE[ev.lawKey];
@@ -1197,7 +988,7 @@
 
       if (gameState.mentalGauge <= 0) {
         setTimeout(() => {
-          alert("⚠️ 멘탈 게이지가 0에 도달했습니다! 지속적인 부동산 악재와 스트레스로 인해 공황 상태에서 집을 헐값에 매각하고 전세로 회귀했습니다.\n\n[선택 다시 하기]로 직전 선택을 취소하거나 처음부터 다시 시작할 수 있습니다.");
+          alert(`⚠️ 멘탈 게이지가 0에 도달했습니다! 지속적인 부동산 악재와 스트레스로 인해 공황 상태에서 계약을 파기하거나 집을 급매로 던졌습니다.\n\n[선택 다시 하기]를 눌러 현명한 법률 선택지로 재도전하세요!`);
         }, 100);
       }
     }
@@ -1212,7 +1003,7 @@
 
     function proceedToNextStep() {
       if (gameState.mentalGauge <= 0) {
-        alert("멘탈이 0인 상태에서는 다음으로 진행할 수 없습니다. '선택 다시 하기'를 눌러 현명한 선택지로 방어하세요!");
+        alert("멘탈이 0인 상태에서는 다음으로 진행할 수 없습니다. '선택 다시 하기'를 눌러 위기를 방어하세요!");
         return;
       }
 
@@ -1221,9 +1012,10 @@
         step: gameState.currentStep
       })));
 
-      gameState.houseValue += 1300;
-      if (gameState.mortgageDebt > 800) {
-        gameState.mortgageDebt -= 800;
+      // Passive micro adjustment per event
+      gameState.houseValue += 600;
+      if (gameState.mortgageDebt > 400) {
+        gameState.mortgageDebt -= 400;
       }
       calculateNetWorth();
 
@@ -1264,12 +1056,12 @@
 
       const finalNetWorthEok = (gameState.netWorth / 10000).toFixed(2);
       document.getElementById('end-networth').innerText = `${finalNetWorthEok}억`;
-      document.getElementById('end-repaid').innerText = "2.4억 원";
-      document.getElementById('end-defense-count').innerText = `${gameState.defendedEvents} / 10회`;
+      document.getElementById('end-repaid').innerText = "2.8억 원";
+      document.getElementById('end-defense-count').innerText = `${gameState.defendedEvents} / ${dynamicEvents.length}개`;
       document.getElementById('end-mental').innerText = `${Math.max(0, gameState.mentalGauge)}%`;
 
       const savePayload = {
-        v: 2,
+        v: 3,
         job: gameState.selectedJob,
         marital: gameState.maritalStatus,
         children: gameState.childCount,
@@ -1323,11 +1115,12 @@
     }
 
     function showTipModal() {
-      alert(`💡 [부동산 악재 핵심 수칙]
+      alert(`💡 [부동산 악재 4대 절대 생존 수칙]
 
-1. 육아휴직으로 소득이 급감했을 땐 연체하지 말고 정부 취약차주 원금상환유예 제도를 신청하세요.
-2. 누수는 민법 580조로 매도인에게 6개월 내 내용증명을 보내 수리비를 청구합니다.
-3. 화재보험과 일상생활배상책임특약(일배책)은 아랫집 누수 피해 수천만원을 막아주는 최강의 방패입니다.`);
+1. 가계약금도 대법원 판례상 본계약 기준 배액배상 대상입니다.
+2. 대출 미발생 시 계약금 전액 반환 특약과 권리말소 동시이행 특약은 생명줄입니다.
+3. 누수 및 숨은 하자는 민법 580조로 안 날부터 6개월 내 내용증명을 보내 전액 청구합니다.
+4. 화재보험과 일상생활배상책임특약(일배책)은 1.5만원으로 수천만원 침수 배상을 막는 방패입니다.`);
     }
 
     function closeModal(id) {
